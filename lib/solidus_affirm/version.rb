@@ -1,0 +1,3 @@
+module SolidusAffirm
+  VERSION = '0.0.1'
+end
