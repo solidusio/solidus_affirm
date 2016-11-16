@@ -5,18 +5,20 @@ require 'solidus_affirm/version'
 Gem::Specification.new do |s|
   s.name        = 'solidus_affirm'
   s.version     = SolidusAffirm::VERSION
-  s.summary     = 'TODO'
-  s.description = 'TODO'
-  s.license     = 'BSD-3-Clause'
+  s.summary     = 'Solidus extension for using Affirm in your store'
+  s.description = s.summary
 
-  # s.author    = 'You'
-  # s.email     = 'you@example.com'
-  # s.homepage  = 'http://www.example.com'
+  s.required_ruby_version = ">= 2.1"
+
+  s.author    = 'Peter Berkenbosch'
+  s.email     = 'peter@stembolt.com'
+  s.homepage  = 'https://stembolt.com/'
+  s.license   = 'BSD-3'
 
   s.files = Dir["{app,config,db,lib}/**/*", 'LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['test/**/*']
 
-  s.add_dependency 'solidus_core', '~> 1.0'
+  s.add_dependency 'solidus_core'
 
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'poltergeist'
