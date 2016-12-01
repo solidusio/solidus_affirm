@@ -24,7 +24,18 @@ module Spree
       it "renders the correct Affirm json payload" do
         subject
         expect(response).to be_success
-        expect(response.body).to_not be_empty
+        expect(json_response).to_not be_empty
+
+        expect(json_response.key?("merchant")).to be_truthy
+        expect(json_response.key?("shipping")).to be_truthy
+        expect(json_response.key?("billing")).to be_truthy
+        expect(json_response.key?("items")).to be_truthy
+
+        expect(json_response["currency"]).to eql "USD"
+        expect(json_response["order_id"]).to eql order.number
+        expect(json_response["shipping_amount"]).to eql order.shipment_total.to_money.cents
+        expect(json_response["tax_amount"]).to eql order.tax_total.to_money.cents
+        expect(json_response["total"]).to eql order.order_total_after_store_credit.to_money.cents
       end
     end
   end

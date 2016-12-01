@@ -10,7 +10,6 @@ end
 
 json.shipping do
   address = @order.ship_address
-
   json.name do
     json.first address.first_name
     json.last address.last_name
@@ -29,7 +28,6 @@ end
 
 json.billing do
   address = @order.bill_address
-
   json.name do
     json.first address.first_name
     json.last address.last_name
