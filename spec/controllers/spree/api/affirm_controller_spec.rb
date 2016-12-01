@@ -13,10 +13,16 @@ module Spree
     end
 
     describe "#payload" do
+      subject { get :payload, format: :json }
+
       before { allow(controller).to receive(:current_order) { order } }
 
+      it "will render the jbuilder json template" do
+        expect(subject).to render_template("api/affirm/payload")
+      end
+
       it "renders the correct Affirm json payload" do
-        get :payload, format: :json
+        subject
         expect(response).to be_success
         expect(response.body).to_not be_empty
       end
