@@ -12,6 +12,7 @@ module Spree
       it "renders the correct Affirm json payload" do
         get :payload, format: :json
         expect(response).to be_success
+        expect(response.body).to_not be_empty
       end
     end
   end
