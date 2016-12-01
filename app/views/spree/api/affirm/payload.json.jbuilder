@@ -21,10 +21,10 @@ json.items @order.line_items do |line_item|
   json.qty line_item.quantity
   json.item_url spree.product_url(line_item.product)
 
-  if item.variant.images.any?
-    json.item_image_url URI.join(root_url, item.variant.images.first.attachment.url(:large))
-  elsif item.variant.product.images.any?
-    json.item_image_url URI.join(root_url, item.variant.product.images.first.attachment.url(:large))
+  if line_item.variant.images.any?
+    json.item_image_url URI.join(root_url, line_item.variant.images.first.attachment.url(:large))
+  elsif line_item.variant.product.images.any?
+    json.item_image_url URI.join(root_url, line_item.variant.product.images.first.attachment.url(:large))
   end
 end
 
