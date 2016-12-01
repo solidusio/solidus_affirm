@@ -1,3 +1,7 @@
 Spree::Core::Engine.routes.draw do
-  # Add your extension routes here
+  namespace :api, defaults: { format: 'json' } do
+    resource :affirm, only: [], controller: 'affirm' do
+      get :payload
+    end
+  end
 end
