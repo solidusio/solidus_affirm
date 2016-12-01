@@ -1,7 +1,3 @@
-# json.config do
-#   json.financial_product_key Spree::Config.get(:affirm_financial_product_key)
-# end
-
 json.merchant do
   json.user_cancel_url cancel_affirm_url
   json.user_confirmation_url confirm_affirm_url
