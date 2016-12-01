@@ -21,7 +21,7 @@ module Spree
         expect(subject).to render_template("api/affirm/payload")
       end
 
-      it "renders the correct Affirm json payload" do
+      xit "renders the correct Affirm json payload" do
         subject
         expect(response).to be_success
         expect(response.body).to_not be_empty

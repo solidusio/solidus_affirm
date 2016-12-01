@@ -9,6 +9,7 @@ end
 
 gem 'pg'
 gem 'mysql2'
+gem 'jbuilder', github: 'rails/jbuilder'
 
 group :development, :test do
   gem "pry-rails"

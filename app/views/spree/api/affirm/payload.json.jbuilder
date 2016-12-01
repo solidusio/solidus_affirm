@@ -51,8 +51,6 @@ json.items @order.line_items do |line_item|
   json.sku line_item.sku
   json.unit_price line_item.price.to_money.cents
   json.qty line_item.quantity
-  # This is shitty, the routing here is handled by angular
-  # and this is a required field, for reasons.
   json.item_url spree_product_url(line_item.product)
 
   if image = line_item.variant.images.first
