@@ -1,6 +1,6 @@
-json.config do
-  json.financial_product_key Spree::Config.get(:affirm_financial_product_key)
-end
+# json.config do
+#   json.financial_product_key Spree::Config.get(:affirm_financial_product_key)
+# end
 
 json.merchant do
   json.user_cancel_url cancel_affirm_url
@@ -51,7 +51,7 @@ json.items @order.line_items do |line_item|
   json.sku line_item.sku
   json.unit_price line_item.price.to_money.cents
   json.qty line_item.quantity
-  json.item_url spree_product_url(line_item.product)
+  json.item_url spree.product_url(line_item.product)
 
   if image = line_item.variant.images.first
     json.item_image_url root_url + image.attachment.url
