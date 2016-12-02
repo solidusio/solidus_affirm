@@ -5,15 +5,15 @@ describe ActiveMerchant::Billing::Affirm do
   let(:charge_id) { "1234-5678-9012" }
 
   def expect_request(method, url_regexp, data, successful_response = true, response = {})
-    affirm_payment.payment_method.provider.should_receive(:ssl_request) { |method, url, data, headers|
+    affirm_payment.payment_method.provider.should_receive(:ssl_request) { |m, url, d, _headers|
       # check method type
-      method.should be(method)
+      m.should be(method)
 
       # test path
       url.should match(url_regexp) unless url_regexp.nil?
 
       # test data
-      data.should eq(data.to_json) unless data.nil?
+      d.should eq(data.to_json) unless d.nil?
 
       # create response
       response = (response || {}).reverse_merge({
@@ -266,7 +266,7 @@ describe ActiveMerchant::Billing::Affirm do
   describe "#commit" do
     context "when a ResponseError is returned" do
       it "returns an invalid response error" do
-        http_response = double()
+        http_response = double
         http_response.stub(:code).and_return('400')
         http_response.stub(:body).and_return("{}")
         affirm_payment.payment_method.provider.should_receive(:ssl_request).and_raise ActiveMerchant::ResponseError.new(http_response)
@@ -276,7 +276,7 @@ describe ActiveMerchant::Billing::Affirm do
 
       context "when the error response has malformed json" do
         it "returns an invalid response error" do
-          http_response = double()
+          http_response = double
           http_response.stub(:code).and_return('400')
           http_response.stub(:body).and_return("{///xdf2fas!!+")
           affirm_payment.payment_method.provider.should_receive(:parse).and_raise JSON::ParserError

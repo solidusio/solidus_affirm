@@ -46,7 +46,6 @@ describe Spree::Gateway::Affirm do
     end
   end
 
-
   describe "#cancel" do
     context "when there is no payment with the given charge_ari" do
       it "returns nil" do
@@ -73,11 +72,11 @@ describe Spree::Gateway::Affirm do
           Spree::Payment.stub_chain(:valid, :where, :first).and_return(affirm_payment)
           affirm_payment.stub(:can_credit?).and_return(true)
           expect(affirm_payment).to receive(:credit!).and_return false
-          _payment_amount = affirm_payment.credit_allowed
+          payment_amount = affirm_payment.credit_allowed
           affirm_payment.payment_method.cancel affirm_payment.response_code
 
           expect(affirm_payment.order.adjustments.count).to be > 0
-          expect(affirm_payment.order.adjustments.last.amount).to eq(-_payment_amount)
+          expect(affirm_payment.order.adjustments.last.amount).to eq(-payment_amount)
         end
       end
 
@@ -117,7 +116,6 @@ describe Spree::Gateway::Affirm do
       end
     end
 
-
     context "when the payment is in a pending state" do
       before do
         affirm_payment.stub(:pending?).and_return true
@@ -132,6 +130,5 @@ describe Spree::Gateway::Affirm do
         affirm_payment.payment_method.cancel affirm_payment.response_code
       end
     end
-
   end
 end

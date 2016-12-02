@@ -1,10 +1,8 @@
 require 'spec_helper'
 
-
 describe Spree::AffirmCheckout do
   let(:valid_checkout) { FactoryGirl.create(:affirm_checkout) }
   let(:affirm_payment) { FactoryGirl.create(:affirm_payment) }
-
 
   describe "scopes" do
     describe "with_payment_profile" do
@@ -12,24 +10,20 @@ describe Spree::AffirmCheckout do
         expect(Spree::AffirmCheckout.all).to eq(Spree::AffirmCheckout.with_payment_profile)
       end
     end
-
-
   end
-
 
   describe '#details' do
     it "calls get_checkout from the payment provider exactly once" do
-      _checkout = FactoryGirl.build(:affirm_checkout, stub_details: false)
-      _checkout.payment_method.provider.stub(:get_checkout) do
-         {"hello" => "there"}
+      checkout = FactoryGirl.build(:affirm_checkout, stub_details: false)
+      checkout.payment_method.provider.stub(:get_checkout) do
+         { "hello" => "there" }
       end
-      expect(_checkout.payment_method.provider).to receive(:get_checkout).exactly(1).times
-      _checkout.details
-      _checkout.details
-      _checkout.details
+      expect(checkout.payment_method.provider).to receive(:get_checkout).exactly(1).times
+      checkout.details
+      checkout.details
+      checkout.details
     end
   end
-
 
   describe "#valid?" do
     context "with all valid checkout details" do
@@ -47,46 +41,43 @@ describe Spree::AffirmCheckout do
       end
 
       it "does not throw an error for case senstive name mismatches" do
-        _checkout = FactoryGirl.build(:affirm_checkout, full_name_case_mismatch: true)
-        _checkout.check_matching_billing_address
-        expect(_checkout.errors.size).to be(0)
-
+        checkout = FactoryGirl.build(:affirm_checkout, full_name_case_mismatch: true)
+        checkout.check_matching_billing_address
+        expect(checkout.errors.size).to be(0)
       end
     end
 
     context "with an extra product is in the checkout details" do
       it "sets an error on line_items" do
-        _checkout = FactoryGirl.build(:affirm_checkout, extra_line_item: true )
-        _checkout.check_valid_products
-        expect(_checkout.errors[:line_items]).to_not be_empty
+        checkout = FactoryGirl.build(:affirm_checkout, extra_line_item: true)
+        checkout.check_valid_products
+        expect(checkout.errors[:line_items]).to_not be_empty
       end
     end
 
-
     context "with the checkout details are missing a product" do
       it "sets an error on line_items" do
-        _checkout = FactoryGirl.build(:affirm_checkout, missing_line_item: true )
-        _checkout.check_valid_products
-        expect(_checkout.errors[:line_items]).to_not be_empty
+        checkout = FactoryGirl.build(:affirm_checkout, missing_line_item: true)
+        checkout.check_valid_products
+        expect(checkout.errors[:line_items]).to_not be_empty
       end
     end
 
     context "with a line item has mismatched quantity" do
       it "sets an error for the item" do
-        _checkout = FactoryGirl.build(:affirm_checkout, quantity_mismatch: true )
-        _checkout.check_valid_products
-        expect(_checkout.errors.size).to be(1)
+        checkout = FactoryGirl.build(:affirm_checkout, quantity_mismatch: true)
+        checkout.check_valid_products
+        expect(checkout.errors.size).to be(1)
       end
     end
 
     context "with a line item has mismatched price" do
       it "sets an error for the item" do
-        _checkout = FactoryGirl.build(:affirm_checkout, price_mismatch: true )
-        _checkout.check_valid_products
-        expect(_checkout.errors.size).to be(1)
+        checkout = FactoryGirl.build(:affirm_checkout, price_mismatch: true)
+        checkout.check_valid_products
+        expect(checkout.errors.size).to be(1)
       end
     end
-
   end
 
   describe "#check_matching_billing_address" do
@@ -99,7 +90,7 @@ describe Spree::AffirmCheckout do
 
       context "with alternate address format" do
         it "does not set any errors for the billing_address" do
-          _checkout = FactoryGirl.build(:affirm_checkout, alternate_billing_address_format: true)
+          valid_checkout = FactoryGirl.build(:affirm_checkout, alternate_billing_address_format: true)
           valid_checkout.check_matching_billing_address
           expect(valid_checkout.errors.size).to be(0)
           expect(valid_checkout.errors[:billing_address]).to be_empty
@@ -108,40 +99,37 @@ describe Spree::AffirmCheckout do
 
       context "with a name.full instead of first/last" do
         it "does not set any error for the billing_address" do
-          _checkout = FactoryGirl.build(:affirm_checkout, billing_address_full_name: true)
-          _checkout.check_matching_billing_address
-          expect(_checkout.errors[:billing_address]).to be_empty
+          checkout = FactoryGirl.build(:affirm_checkout, billing_address_full_name: true)
+          checkout.check_matching_billing_address
+          expect(checkout.errors[:billing_address]).to be_empty
         end
       end
     end
 
     context "with a mismtached billing address" do
       it "sets an error for the billing_address" do
-        _checkout = FactoryGirl.build(:affirm_checkout, billing_address_mismatch: true)
-        _checkout.check_matching_billing_address
-        expect(_checkout.errors[:billing_address]).not_to be_empty
+        checkout = FactoryGirl.build(:affirm_checkout, billing_address_mismatch: true)
+        checkout.check_matching_billing_address
+        expect(checkout.errors[:billing_address]).not_to be_empty
       end
 
       context "with alternate address format" do
         it "sets an error for the billing_address" do
-          _checkout = FactoryGirl.build(:affirm_checkout, billing_address_mismatch: true, alternate_billing_address_format: true)
-          _checkout.check_matching_billing_address
-          expect(_checkout.errors[:billing_address]).not_to be_empty
+          checkout = FactoryGirl.build(:affirm_checkout, billing_address_mismatch: true, alternate_billing_address_format: true)
+          checkout.check_matching_billing_address
+          expect(checkout.errors[:billing_address]).not_to be_empty
         end
       end
 
-
       context "with a name.full instead of first/last" do
         it "sets an error for the billing_address" do
-          _checkout = FactoryGirl.build(:affirm_checkout, billing_address_mismatch: true, billing_address_full_name: true)
-          _checkout.check_matching_billing_address
-          expect(_checkout.errors[:billing_address]).not_to be_empty
+          checkout = FactoryGirl.build(:affirm_checkout, billing_address_mismatch: true, billing_address_full_name: true)
+          checkout.check_matching_billing_address
+          expect(checkout.errors[:billing_address]).not_to be_empty
         end
       end
     end
   end
-
-
 
   describe "#check_matching_shipping_address" do
     context "with a matching shipping address" do
@@ -151,16 +139,14 @@ describe Spree::AffirmCheckout do
       end
     end
 
-
     context "with a mismatched shipping address" do
       it "adds an error for the shipping_address" do
-        _checkout = FactoryGirl.build(:affirm_checkout, shipping_address_mismatch: true)
-        _checkout.check_matching_shipping_address
-        expect(_checkout.errors[:shipping_address]).not_to be_empty
+        checkout = FactoryGirl.build(:affirm_checkout, shipping_address_mismatch: true)
+        checkout.check_matching_shipping_address
+        expect(checkout.errors[:shipping_address]).not_to be_empty
       end
     end
   end
-
 
   describe "#check_matching_billing_email" do
     context "with a matching billing email" do
@@ -170,16 +156,14 @@ describe Spree::AffirmCheckout do
       end
     end
 
-
     context "with a mismatched billing email" do
       it "adds an error for billing_email" do
-        _checkout = FactoryGirl.build(:affirm_checkout, billing_email_mismatch: true)
-        _checkout.check_matching_billing_email
-        expect(_checkout.errors[:billing_email]).not_to be_empty
+        checkout = FactoryGirl.build(:affirm_checkout, billing_email_mismatch: true)
+        checkout.check_matching_billing_email
+        expect(checkout.errors[:billing_email]).not_to be_empty
       end
     end
   end
-
 
   describe "check_matching_product_key" do
     context "with a matching product key" do
@@ -189,26 +173,21 @@ describe Spree::AffirmCheckout do
       end
     end
 
-
     context "with a mistmatched product key" do
       it "adds an error for financial_product_key" do
-        _checkout = FactoryGirl.build(:affirm_checkout, product_key_mismatch: true)
-        _checkout.check_matching_product_key
-        expect(_checkout.errors[:financial_product_key]).not_to be_empty
+        checkout = FactoryGirl.build(:affirm_checkout, product_key_mismatch: true)
+        checkout.check_matching_product_key
+        expect(checkout.errors[:financial_product_key]).not_to be_empty
       end
     end
   end
 
-
-
   describe "actions" do
-
     describe "#actions" do
       it "returns capture, void, and credit" do
         expect(valid_checkout.actions).to eq(['capture', 'void', 'credit'])
       end
     end
-
 
     describe "can_capture?" do
       context "with a payment response code set" do
@@ -222,7 +201,6 @@ describe Spree::AffirmCheckout do
           end
         end
 
-
         context "with a payment in checkout state" do
           before(:each) { affirm_payment.state = 'checkout' }
 
@@ -231,7 +209,6 @@ describe Spree::AffirmCheckout do
           end
         end
 
-
         context "with a payment in complete state" do
           before(:each) { affirm_payment.state = 'complete' }
 
@@ -239,9 +216,7 @@ describe Spree::AffirmCheckout do
             expect(valid_checkout.can_capture?(affirm_payment)).to be(false)
           end
         end
-
       end
-
 
       context "with no response code set on the payment" do
         before(:each) { affirm_payment.response_code = nil }
@@ -251,7 +226,6 @@ describe Spree::AffirmCheckout do
         end
       end
     end
-
 
     describe "can_void?" do
       context "with a payment response code set" do
@@ -273,7 +247,6 @@ describe Spree::AffirmCheckout do
           end
         end
 
-
         context "with a payment in complete state" do
           before(:each) { affirm_payment.state = 'complete' }
 
@@ -283,7 +256,6 @@ describe Spree::AffirmCheckout do
         end
       end
 
-
       context "with no response code set on the payment" do
         before(:each) { affirm_payment.response_code = nil }
 
@@ -292,8 +264,6 @@ describe Spree::AffirmCheckout do
         end
       end
     end
-
-
 
     describe "can_credit?" do
       context "when the payment has not been completed" do
@@ -319,7 +289,7 @@ describe Spree::AffirmCheckout do
         before(:each) { affirm_payment.order.payment_state = 'credit_owed' }
 
         context "when the payment has been completed" do
-          before(:each) { affirm_payment.state = 'completed'}
+          before(:each) { affirm_payment.state = 'completed' }
 
           context "when the payment credit_allowed is greater than 0" do
             before(:each) do
@@ -330,7 +300,6 @@ describe Spree::AffirmCheckout do
               expect(valid_checkout.can_credit?(affirm_payment)).to be(true)
             end
           end
-
 
           context "when the payment credit_allowed is equal to 0" do
             before(:each) do
@@ -343,7 +312,6 @@ describe Spree::AffirmCheckout do
           end
         end
       end
-
     end
   end
 end
