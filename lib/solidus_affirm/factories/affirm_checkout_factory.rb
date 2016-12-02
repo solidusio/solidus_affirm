@@ -103,14 +103,6 @@ FactoryGirl.define do
         details['config']['financial_product_key'] = checkout.payment_method.preferred_product_key
       end
 
-      # case mismatch
-      unless evaluator.full_name_case_mismatch
-        details['billing']['name'] = {
-          "full" => checkout.order.bill_address.firstname.try(:upcase) + " " +
-                    checkout.order.bill_address.lastname.try(:upcase)
-        }
-      end
-
       # shipping address
       unless evaluator.shipping_address_mismatch
         details['shipping'] = {
@@ -205,7 +197,7 @@ FactoryGirl.define do
       end
 
       if evaluator.stub_details
-        checkout.stub(details: _details)
+        checkout.stub(details: details)
       end
     end
   end

@@ -3,9 +3,6 @@ require 'spec_helper'
 describe Spree::AffirmController, type: :controller do
   let(:user) { create(:user) }
   let(:checkout) { build(:affirm_checkout) }
-  let(:bad_billing_checkout) { build(:affirm_checkout, billing_address_mismatch: true) }
-  let(:bad_shipping_checkout) { build(:affirm_checkout, shipping_address_mismatch: true) }
-  let(:bad_email_checkout) { build(:affirm_checkout, billing_email_mismatch: true) }
 
   describe "POST confirm" do
     def post_request(token, payment_id)
@@ -51,34 +48,12 @@ describe Spree::AffirmController, type: :controller do
           expect(checkout.order.payments.first.source).to eq(checkout)
         end
 
-        # it "transitions to complete if confirmation is not required" do
-        #   checkout.order.stub confirmation_required?: false
-        #   post_request "123423423", checkout.payment_method.id
-
-        #   expect(checkout.order.state).to eq("complete")
-        # end
-
         it "transitions to confirm if confirmation is required" do
           checkout.order.stub confirmation_required?: true
           post_request "123423423", checkout.payment_method.id
 
           expect(checkout.order.reload.state).to eq("confirm")
         end
-      end
-    end
-
-    context "when the billing_email does not match the order" do
-      before do
-        Spree::AffirmCheckout.stub new: bad_email_checkout
-        controller.stub current_order: bad_email_checkout.order
-      end
-
-      it "updates the billing_email on the order" do
-        old_email = bad_email_checkout.order.email
-        post_request '12345789', bad_email_checkout.payment_method.id
-
-        expect(bad_email_checkout.order.email).not_to be(old_email)
-        expect(bad_email_checkout.valid?).to be(true)
       end
     end
 
