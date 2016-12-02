@@ -7,9 +7,7 @@ describe Spree::AffirmController, type: :controller do
   let(:bad_shipping_checkout) { build(:affirm_checkout, shipping_address_mismatch: true) }
   let(:bad_email_checkout) { build(:affirm_checkout, billing_email_mismatch: true) }
 
-
   describe "POST confirm" do
-
     def post_request(token, payment_id)
       post :confirm, checkout_token: token, payment_method_id: payment_id, use_route: 'spree'
     end
@@ -67,7 +65,6 @@ describe Spree::AffirmController, type: :controller do
           expect(checkout.order.reload.state).to eq("confirm")
         end
       end
-
     end
 
     context "when the billing_address does not match the order" do
@@ -79,14 +76,13 @@ describe Spree::AffirmController, type: :controller do
       end
 
       it "creates a new address record for the order" do
-        _old_billing_address = bad_billing_checkout.order.bill_address
+        old_billing_address = bad_billing_checkout.order.bill_address
         post_request '12345789', bad_billing_checkout.payment_method.id
 
-        expect(bad_billing_checkout.order.bill_address).not_to be(_old_billing_address)
+        expect(bad_billing_checkout.order.bill_address).not_to be(old_billing_address)
         expect(bad_billing_checkout.valid?).to be(true)
       end
     end
-
 
     context "when the shipping_address does not match the order" do
       before do
@@ -97,15 +93,13 @@ describe Spree::AffirmController, type: :controller do
       end
 
       it "creates a new address record for the order" do
-        _old_shipping_address = bad_shipping_checkout.order.ship_address
+        old_shipping_address = bad_shipping_checkout.order.ship_address
         post_request '12345789', bad_shipping_checkout.payment_method.id
 
-        expect(bad_shipping_checkout.order.ship_address).not_to be(_old_shipping_address)
+        expect(bad_shipping_checkout.order.ship_address).not_to be(old_shipping_address)
         expect(bad_shipping_checkout.valid?).to be(true)
       end
     end
-
-
 
     context "when the billing_email does not match the order" do
       before do
@@ -114,14 +108,13 @@ describe Spree::AffirmController, type: :controller do
       end
 
       it "updates the billing_email on the order" do
-        _old_email = bad_email_checkout.order.email
+        old_email = bad_email_checkout.order.email
         post_request '12345789', bad_email_checkout.payment_method.id
 
-        expect(bad_email_checkout.order.email).not_to be(_old_email)
+        expect(bad_email_checkout.order.email).not_to be(old_email)
         expect(bad_email_checkout.valid?).to be(true)
       end
     end
-
 
     context "there is no current order" do
       before(:each) do

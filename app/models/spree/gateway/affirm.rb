@@ -36,7 +36,7 @@ module Spree
     def cancel(charge_ari)
       payment = Spree::Payment.valid.where(
         response_code: charge_ari,
-        source_type:   "#{payment_source_class}"
+        source_type: payment_source_class
       ).first
 
       return if payment.nil?
@@ -44,14 +44,14 @@ module Spree
       if payment.pending?
         payment.void_transaction!
 
-      elsif payment.completed? and payment.can_credit?
+      elsif payment.completed? && payment.can_credit?
 
         # create adjustment
         # TODO this feels wrong, we should see to use a refund here.
         payment.order.adjustments.create(
-            label: "Refund - Canceled Order",
-            amount: -_payment.credit_allowed.to_f,
-            order: _payment.order
+          label: "Refund - Canceled Order",
+          amount: -_payment.credit_allowed.to_f,
+          order: _payment.order
         )
         payment.order.update!
         payment.credit!

@@ -2,8 +2,8 @@ module Spree
   class AffirmController < Spree::StoreController
     helper 'spree/orders'
 
-    #the confirm will do it's own protection by making calls to affirm
-    protect_from_forgery :except => [:confirm]
+    # the confirm will do it's own protection by making calls to affirm
+    protect_from_forgery except: [:confirm]
 
     def confirm
       order = current_order || raise(ActiveRecord::RecordNotFound)
@@ -23,13 +23,15 @@ module Spree
         token: params[:checkout_token],
         payment_method: payment_method
       )
-
+      # TODO: if not valid! redirect to path and show error
+      # that might also be done correctly down here when the order
+      # is not complete due to an invalid affirm_checkout.
       affirm_checkout.save
 
-      affirm_payment = order.payments.create!({
+      order.payments.create!({
         payment_method: payment_method,
         amount: order.total,
-        source: _affirm_checkout
+        source: affirm_checkout
       })
 
       # transition to confirm or complete
