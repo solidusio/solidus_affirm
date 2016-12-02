@@ -7,8 +7,7 @@ module Spree
 
     def confirm
       order = current_order || raise(ActiveRecord::RecordNotFound)
-
-      if !params[:checkout_token]
+      if !params[:checkout_token].present?
         flash[:notice] = "Invalid order confirmation data."
         return redirect_to checkout_state_path(current_order.state)
       end

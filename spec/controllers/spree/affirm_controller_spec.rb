@@ -6,12 +6,12 @@ describe Spree::AffirmController, type: :controller do
 
   describe "POST confirm" do
     def post_request(token, payment_id)
-      post :confirm, checkout_token: token, payment_method_id: payment_id, use_route: 'spree'
+      post :confirm, checkout_token: token, payment_method_id: payment_id, use_route: :spree
     end
 
     before do
-      controller.stub authenticate_spree_user!: true
-      controller.stub spree_current_user: user
+      allow(controller).to receive(:authenticate_spree_user!).and_return(true)
+      allow(controller).to receive(:spree_current_user).and_return(user)
     end
 
     context "when the checkout matches the order" do
@@ -31,6 +31,7 @@ describe Spree::AffirmController, type: :controller do
         before do
           checkout.order.state = 'complete'
         end
+
         it "redirects to the current order state" do
           post_request '123456789', checkout.payment_method.id
           expect(response).to redirect_to(controller.order_path(checkout.order))
@@ -59,13 +60,11 @@ describe Spree::AffirmController, type: :controller do
 
     context "there is no current order" do
       before(:each) do
-        controller.stub current_order: nil
+        allow(controller).to receive(:current_order).and_return(nil)
       end
 
       it "raises an ActiveRecord::RecordNotFound error" do
-        expect do
-          post_request nil, nil
-        end.to raise_error(ActiveRecord::RecordNotFound)
+        expect{ post_request(nil, nil) }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end
