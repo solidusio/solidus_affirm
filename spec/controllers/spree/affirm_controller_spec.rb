@@ -67,40 +67,6 @@ describe Spree::AffirmController, type: :controller do
       end
     end
 
-    context "when the billing_address does not match the order" do
-      before do
-        Spree::AffirmCheckout.stub new: bad_billing_checkout
-        state = FactoryGirl.create(:state, abbr: bad_billing_checkout.details['billing']['address']['region1_code'])
-        Spree::State.stub find_by_abbr: state, find_by_name: state
-        controller.stub current_order: bad_billing_checkout.order
-      end
-
-      it "creates a new address record for the order" do
-        old_billing_address = bad_billing_checkout.order.bill_address
-        post_request '12345789', bad_billing_checkout.payment_method.id
-
-        expect(bad_billing_checkout.order.bill_address).not_to be(old_billing_address)
-        expect(bad_billing_checkout.valid?).to be(true)
-      end
-    end
-
-    context "when the shipping_address does not match the order" do
-      before do
-        Spree::AffirmCheckout.stub new: bad_shipping_checkout
-        state = FactoryGirl.create(:state, abbr: bad_shipping_checkout.details['shipping']['address']['region1_code'])
-        Spree::State.stub find_by_abbr: state, find_by_name: state
-        controller.stub current_order: bad_shipping_checkout.order
-      end
-
-      it "creates a new address record for the order" do
-        old_shipping_address = bad_shipping_checkout.order.ship_address
-        post_request '12345789', bad_shipping_checkout.payment_method.id
-
-        expect(bad_shipping_checkout.order.ship_address).not_to be(old_shipping_address)
-        expect(bad_shipping_checkout.valid?).to be(true)
-      end
-    end
-
     context "when the billing_email does not match the order" do
       before do
         Spree::AffirmCheckout.stub new: bad_email_checkout
