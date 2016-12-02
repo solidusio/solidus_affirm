@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe Spree::AffirmController, type: :controller do
   let(:user) { create(:user) }
-  let(:checkout) { FactoryGirl.build(:affirm_checkout) }
-  let(:bad_billing_checkout) { FactoryGirl.build(:affirm_checkout, billing_address_mismatch: true) }
-  let(:bad_shipping_checkout) { FactoryGirl.build(:affirm_checkout, shipping_address_mismatch: true) }
-  let(:bad_email_checkout) { FactoryGirl.build(:affirm_checkout, billing_email_mismatch: true) }
+  let(:checkout) { build(:affirm_checkout) }
+  let(:bad_billing_checkout) { build(:affirm_checkout, billing_address_mismatch: true) }
+  let(:bad_shipping_checkout) { build(:affirm_checkout, shipping_address_mismatch: true) }
+  let(:bad_email_checkout) { build(:affirm_checkout, billing_email_mismatch: true) }
 
 
   describe "POST confirm" do
