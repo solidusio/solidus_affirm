@@ -30,6 +30,8 @@ require 'spree/testing_support/controller_requests'
 require 'spree/testing_support/factories'
 require 'spree/testing_support/url_helpers'
 
+require 'spree/api/testing_support/helpers'
+
 # Requires factories defined in lib/solidus_affirm/factories.rb
 require 'solidus_affirm/factories'
 
@@ -46,6 +48,8 @@ RSpec.configure do |config|
   # visit spree.admin_path
   # current_path.should eql(spree.products_path)
   config.include Spree::TestingSupport::UrlHelpers
+  config.include Spree::TestingSupport::ControllerRequests, type: :controller
+  config.include Spree::Api::TestingSupport::Helpers, type: :controller
 
   # == Mock Framework
   #
