@@ -33,6 +33,10 @@ require 'spree/testing_support/url_helpers'
 # Requires factories defined in lib/solidus_affirm/factories.rb
 require 'solidus_affirm/factories'
 
+Spree::Core::Engine.routes.default_url_options = {
+  host: 'shop.localhost:3000'
+}
+
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 
@@ -46,7 +50,6 @@ RSpec.configure do |config|
   # visit spree.admin_path
   # current_path.should eql(spree.products_path)
   config.include Spree::TestingSupport::UrlHelpers
-
   # == Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:

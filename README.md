@@ -16,6 +16,16 @@ Bundle your dependencies and run the installation generator:
 bundle
 bundle exec rails g solidus_affirm:install
 ```
+## Configuration
+
+To generate the correct URL's in the JSON payload we need to specify the
+`default_url_options` for the Solidus engine. You can do that like this:
+
+```
+Spree::Core::Engine.routes.default_url_options = {
+  host: 'example.com'
+}
+```
 
 ## Testing
 
