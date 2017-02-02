@@ -24,6 +24,10 @@ module SolidusAffirm
       source.is_a? payment_source_class
     end
 
+    def payment_profiles_supported?
+      false
+    end
+
     # Affirm doesn't have a purcase endpoint
     # so autocapture doesn't make sense. Especially because you have to
     # leave the store and come back to confirm your order. Stores should
