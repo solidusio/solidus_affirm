@@ -1,11 +1,4 @@
+<%= render partial: 'solidus_affirm/affirm_javascript' %>
 <%= javascript_include_tag "spree/frontend/affirm_checkout" %>
-<%
-  config = {
-    confirmation_url: confirm_affirm_url(payment_method_id: payment_method.id, order_id: current_order.id),
-    cancel_url: cancel_affirm_url(payment_method_id: payment_method.id, order_id: current_order.id),
-  }
-  payload = SolidusAffirm::CheckoutPayload.new(current_order, config)
-  json = SolidusAffirm::CheckoutPayloadSerializer.new(payload, root: false).to_json
-%>
 
-<div id="affirm_checkout_payload" class="hidden" data-affirm='<%=raw(json)%>' data-paymentgateway='<%=SolidusAffirm::Gateway.first.id%>' />
+<div id="affirm_checkout_payload" class="hidden" data-affirm='<%=raw(affirm_payload_json(current_order, payment_method))%>' data-paymentgateway='<%=SolidusAffirm::Gateway.first.id%>' />
