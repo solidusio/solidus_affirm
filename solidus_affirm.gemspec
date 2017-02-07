@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'solidus', ['>= 1.1', '< 3']
   s.add_dependency 'active_model_serializers', '~> 0.10'
+  s.add_dependency 'affirm-ruby', '1.0.2'
 
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'poltergeist'
