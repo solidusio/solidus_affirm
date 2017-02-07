@@ -19,30 +19,27 @@ http_interactions:
       - "*/*"
   response:
     status:
-      code: 200
-      message: OK
+      code: 400
+      message: BAD REQUEST
     headers:
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Thu, 02 Feb 2017 20:46:12 GMT
+      - Sun, 12 Feb 2017 20:17:28 GMT
       Server:
       - openresty
-      Strict-Transport-Security:
-      - max-age=86400; includeSubDomains
       X-Affirm-Request-Id:
-      - 1af04dd3-2cce-45fe-c5ee-20e60507e3ab
+      - dfde0170-aa2b-4b5a-cb71-77f2e4a6648e
       Content-Length:
-      - '167'
+      - '108'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '{"fee": 1275, "created": "2017-02-02T20:46:12Z", "currency": "USD",
-        "amount": 42499, "type": "capture", "id": "7DOHCZFER4H7JM99", "transaction_id":
-        "Vdoadw3u72HiW1LP"}'
+      string: '{"status_code": 400, "message": "Duplicate capture", "code": "duplicate-capture",
+        "type": "invalid_request"}'
     http_version: 
-  recorded_at: Thu, 02 Feb 2017 20:46:12 GMT
+  recorded_at: Sun, 12 Feb 2017 20:17:28 GMT
 recorded_with: VCR 3.0.3

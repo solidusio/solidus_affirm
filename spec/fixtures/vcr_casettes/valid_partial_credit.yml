@@ -2,10 +2,10 @@
 http_interactions:
 - request:
     method: post
-    uri: https://sandbox.affirm.com/api/v2/charges/N330-Z6D4/capture
+    uri: https://sandbox.affirm.com/api/v2/charges/N330-Z6D4/refund
     body:
       encoding: UTF-8
-      string: "{}"
+      string: '{"amount":1000}'
     headers:
       Authorization:
       - Basic WFBTUTNDQTdQTE43Q0pDSzp3OW14a1FVcnlLalRZRHFPZlN2WVRlVEdvTElVUktwVQ==
@@ -27,22 +27,22 @@ http_interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 02 Feb 2017 20:46:12 GMT
+      - Thu, 02 Feb 2017 21:11:10 GMT
       Server:
       - openresty
       Strict-Transport-Security:
       - max-age=86400; includeSubDomains
       X-Affirm-Request-Id:
-      - 1af04dd3-2cce-45fe-c5ee-20e60507e3ab
+      - 0306c002-b282-4c24-cc09-dea2f1149fc7
       Content-Length:
-      - '167'
+      - '172'
       Connection:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '{"fee": 1275, "created": "2017-02-02T20:46:12Z", "currency": "USD",
-        "amount": 42499, "type": "capture", "id": "7DOHCZFER4H7JM99", "transaction_id":
-        "Vdoadw3u72HiW1LP"}'
+      string: '{"created": "2017-02-02T21:11:09Z", "fee_refunded": 30, "currency":
+        "USD", "amount": 1000, "type": "refund", "id": "Q9V5OSY77YIZN8S0", "transaction_id":
+        "tFpFOCQrW3b8UxDU"}'
     http_version: 
-  recorded_at: Thu, 02 Feb 2017 20:46:12 GMT
+  recorded_at: Thu, 02 Feb 2017 21:11:10 GMT
 recorded_with: VCR 3.0.3
