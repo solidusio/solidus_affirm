@@ -1,4 +1,6 @@
-module Affirm
+require 'active_model_serializers'
+
+module SolidusAffirm
   # This class represents the json payload needed for the Affirm checkout.
   # It will escapsulate the +Spree::Order+ and the needed configuration and
   # meta data that will be serialized and send as JSON to Affirm.

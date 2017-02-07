@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-RSpec.describe Affirm::AddressSerializer do
+RSpec.describe SolidusAffirm::AddressSerializer do
   let(:address) { create(:address, firstname: "John", lastname: "Do", zipcode: "58451") }
-  let(:serializer) { Affirm::AddressSerializer.new(address, root: false) }
+  let(:serializer) { SolidusAffirm::AddressSerializer.new(address, root: false) }
   subject { JSON.parse(serializer.to_json) }
 
   describe "name" do

@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-RSpec.describe Affirm::CheckoutPayloadSerializer do
-  let(:affirm_checkout_payload) { Affirm::CheckoutPayload.new(order, config, metadata) }
-  let(:serializer) { Affirm::CheckoutPayloadSerializer.new(affirm_checkout_payload, root: false) }
+RSpec.describe SolidusAffirm::CheckoutPayloadSerializer do
+  let(:affirm_checkout_payload) { SolidusAffirm::CheckoutPayload.new(order, config, metadata) }
+  let(:serializer) { SolidusAffirm::CheckoutPayloadSerializer.new(affirm_checkout_payload, root: false) }
   let(:line_item_attributes) do
     [
       { product: create(:product, name: 'awesome product', sku: "P1") },
