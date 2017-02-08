@@ -10,5 +10,16 @@ module SolidusAffirm
     def callback_hook
       @callback_hook ||= SolidusAffirm::CallbackHook::Base
     end
+
+    # Allows implementing custom controller for handling the confirming
+    #  and canceling callbacks from Affirm.
+    # @!attribute [rw] callback_controller_name
+    # @see Spree::AffirmController
+    # @return [String] The controller name used in the routes file.
+    #   The standard controller is the 'affirm' controller
+    attr_writer :callback_controller_name
+    def callback_controller_name
+      @callback_controller_name ||= "affirm"
+    end
   end
 end
