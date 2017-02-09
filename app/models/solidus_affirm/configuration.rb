@@ -21,5 +21,15 @@ module SolidusAffirm
     def callback_controller_name
       @callback_controller_name ||= "affirm"
     end
+
+    # Allows overriding the main checkout payload serializer
+    # @!attribute [rw] checkout_payload_serializer
+    # @see SolidusAffirm::CheckoutPayloadSerializer
+    # @return [Class] The serializer class that will be used for serializing
+    #  the +SolidusAffirm::CheckoutPayload+ object.
+    attr_writer :checkout_payload_serializer
+    def checkout_payload_serializer
+      @checkout_payload_serializer ||= SolidusAffirm::CheckoutPayloadSerializer
+    end
   end
 end
