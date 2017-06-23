@@ -74,7 +74,7 @@ RSpec.describe SolidusAffirm::AffirmClient do
       let(:charge_id) { "X0KF-8HQY" }
       it "will void the payment in Affirm" do
         VCR.use_cassette("valid_void") do
-          response = subject.void(nil, charge_id, {})
+          response = subject.void(charge_id, nil, {})
           expect(response.success?).to be_truthy
         end
       end
@@ -83,14 +83,14 @@ RSpec.describe SolidusAffirm::AffirmClient do
     context "on a captured payment" do
       it "will return an unsuccesfull response" do
         VCR.use_cassette("invalid_void") do
-          response = subject.void(nil, charge_id, {})
+          response = subject.void(charge_id, nil, {})
           expect(response.success?).to be_falsey
         end
       end
 
       it "will return the error message from Affirm in the response" do
         VCR.use_cassette("invalid_void") do
-          response = subject.void(nil, charge_id, {})
+          response = subject.void(charge_id, nil, {})
           expect(response.message).to eql "Cannot void captured charge"
         end
       end
