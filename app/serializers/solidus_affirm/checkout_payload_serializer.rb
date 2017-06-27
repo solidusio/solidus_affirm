@@ -1,6 +1,6 @@
 require 'active_model_serializers'
 
-module Affirm
+module SolidusAffirm
   class CheckoutPayloadSerializer < ActiveModel::Serializer
     attributes :merchant, :shipping, :billing, :items, :discounts, :metadata,
     :order_id, :shipping_amount, :tax_amount, :total
@@ -15,17 +15,17 @@ module Affirm
     end
 
     def shipping
-      Affirm::AddressSerializer.new(object.ship_address)
+      AddressSerializer.new(object.ship_address)
     end
 
     def billing
-      Affirm::AddressSerializer.new(object.bill_address)
+      AddressSerializer.new(object.bill_address)
     end
 
     def items
       ActiveModel::Serializer::CollectionSerializer.new(
         object.items,
-        serializer: Affirm::LineItemSerializer,
+        serializer: LineItemSerializer,
         root: false
       )
     end

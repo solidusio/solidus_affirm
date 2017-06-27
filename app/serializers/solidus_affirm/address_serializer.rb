@@ -1,6 +1,6 @@
 require 'active_model_serializers'
 
-module Affirm
+module SolidusAffirm
   class AddressSerializer < ActiveModel::Serializer
     attributes :name, :address
 

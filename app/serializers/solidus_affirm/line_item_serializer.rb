@@ -1,6 +1,6 @@
 require 'active_model_serializers'
 
-module Affirm
+module SolidusAffirm
   class LineItemSerializer < ActiveModel::Serializer
     attributes :display_name, :sku, :unit_price, :qty, :item_image_url, :item_url
 

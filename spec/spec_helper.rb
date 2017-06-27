@@ -18,6 +18,8 @@ require File.expand_path('../dummy/config/environment.rb', __FILE__)
 require 'rspec/rails'
 require 'database_cleaner'
 require 'ffaker'
+require 'vcr'
+require "capybara/poltergeist"
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -36,6 +38,8 @@ require 'solidus_affirm/factories'
 Spree::Core::Engine.routes.default_url_options = {
   host: 'shop.localhost:3000'
 }
+
+Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods

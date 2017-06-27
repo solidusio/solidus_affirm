@@ -1,0 +1,133 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandbox.affirm.com/api/v2/charges
+    body:
+      encoding: UTF-8
+      string: '{"checkout_token":"26VJRAAYE0MB0V25"}'
+    headers:
+      Authorization:
+      - Basic WFBTUTNDQTdQTE43Q0pDSzp3OW14a1FVcnlLalRZRHFPZlN2WVRlVEdvTElVUktwVQ==
+      User-Agent:
+      - Faraday v0.9.2
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 02 Feb 2017 20:17:09 GMT
+      Server:
+      - openresty
+      Strict-Transport-Security:
+      - max-age=86400; includeSubDomains
+      X-Affirm-Request-Id:
+      - fdf64c5e-17df-4f5c-cf4a-cf050383c329
+      Content-Length:
+      - '2003'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"currency": "USD", "id": "N330-Z6D4", "under_dispute": false, "user_id":
+        "7058-0675-OWZI", "details": {"merchant": {"public_api_key": "XPSQ3CA7PLN7CJCK",
+        "user_cancel_url": "http://localhost:3000/affirm/cancel?order_id=12&payment_method_id=4",
+        "user_confirmation_url": "http://localhost:3000/affirm/confirm?order_id=12&payment_method_id=4",
+        "name": "[TEST] Stembolt"}, "tax_amount": 2024, "billing": {"name": {"full":
+        "Peter Berkenbosch", "last": "Berkenbosch", "first": "Peter"}, "address":
+        {"city": "New York", "country": "USA", "zipcode": "10001", "line1": "20 W
+        29th St", "line2": "", "state": "NY"}}, "checkout_type": "merchant", "order_id":
+        "R368883147", "items": {"ROR-00011": {"sku": "ROR-00011", "item_url": "http://9cfb58bc.ngrok.io/products/ruby-on-rails-tote",
+        "display_name": "Ruby on Rails Tote", "unit_price": 1599, "qty": 25, "item_type":
+        "physical", "item_image_url": "/spree/products/21/large/ror_tote.jpeg?1485939804"}},
+        "shipping": {"name": {"full": "Peter Berkenbosch", "last": "Berkenbosch",
+        "first": "Peter"}, "address": {"city": "New York", "country": "USA", "zipcode":
+        "10001", "line1": "20 W 29th St", "line2": "", "state": "NY"}}, "currency":
+        "USD", "meta": {"release": "true", "user_timezone": "America/New_York", "__affirm_tracking_uuid":
+        "35f9a44b-586a-46e9-bdd2-1cf76804f756"}, "shipping_amount": 500, "total":
+        42499, "config": {}, "api_version": "v2", "merchant_external_reference": "R368883147"},
+        "refundable": false, "charge_event_count": 0, "events": [{"created": "2017-02-02T20:17:07Z",
+        "currency": "USD", "amount": 42499, "type": "auth", "id": "Q9QRCO9ZKTBVGME4",
+        "transaction_id": "5Mx10EEnyZUsfqbH"}], "pending": true, "merchant_external_reference":
+        "R368883147", "status": "authorized", "order_id": "R368883147", "void": false,
+        "expires": "2017-03-04T20:17:08Z", "payable": 0, "merchant_id": "3VXA5KS4ZA7IZLA3",
+        "auth_hold": 42499, "refunded_amount": 0, "created": "2017-02-02T14:59:44Z",
+        "amount": 42499, "balance": 42499, "financing_program": "default_3_6_12"}'
+    http_version: 
+  recorded_at: Thu, 02 Feb 2017 20:17:09 GMT
+- request:
+    method: get
+    uri: https://sandbox.affirm.com/api/v2/charges/N330-Z6D4
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Basic WFBTUTNDQTdQTE43Q0pDSzp3OW14a1FVcnlLalRZRHFPZlN2WVRlVEdvTElVUktwVQ==
+      User-Agent:
+      - Faraday v0.9.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 02 Feb 2017 20:17:09 GMT
+      Server:
+      - openresty
+      Strict-Transport-Security:
+      - max-age=86400; includeSubDomains
+      X-Affirm-Request-Id:
+      - 27322aac-f934-48e6-c8fd-268a36c6be96
+      Content-Length:
+      - '2003'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"currency": "USD", "id": "N330-Z6D4", "under_dispute": false, "user_id":
+        "7058-0675-OWZI", "details": {"merchant": {"public_api_key": "XPSQ3CA7PLN7CJCK",
+        "user_cancel_url": "http://localhost:3000/affirm/cancel?order_id=12&payment_method_id=4",
+        "user_confirmation_url": "http://localhost:3000/affirm/confirm?order_id=12&payment_method_id=4",
+        "name": "[TEST] Stembolt"}, "tax_amount": 2024, "billing": {"name": {"full":
+        "Peter Berkenbosch", "last": "Berkenbosch", "first": "Peter"}, "address":
+        {"city": "New York", "country": "USA", "zipcode": "10001", "line1": "20 W
+        29th St", "line2": "", "state": "NY"}}, "checkout_type": "merchant", "order_id":
+        "R368883147", "items": {"ROR-00011": {"sku": "ROR-00011", "item_url": "http://9cfb58bc.ngrok.io/products/ruby-on-rails-tote",
+        "display_name": "Ruby on Rails Tote", "unit_price": 1599, "qty": 25, "item_type":
+        "physical", "item_image_url": "/spree/products/21/large/ror_tote.jpeg?1485939804"}},
+        "shipping": {"name": {"full": "Peter Berkenbosch", "last": "Berkenbosch",
+        "first": "Peter"}, "address": {"city": "New York", "country": "USA", "zipcode":
+        "10001", "line1": "20 W 29th St", "line2": "", "state": "NY"}}, "currency":
+        "USD", "meta": {"release": "true", "user_timezone": "America/New_York", "__affirm_tracking_uuid":
+        "35f9a44b-586a-46e9-bdd2-1cf76804f756"}, "shipping_amount": 500, "total":
+        42499, "config": {}, "api_version": "v2", "merchant_external_reference": "R368883147"},
+        "refundable": false, "charge_event_count": 0, "events": [{"created": "2017-02-02T20:17:07Z",
+        "currency": "USD", "amount": 42499, "type": "auth", "id": "Q9QRCO9ZKTBVGME4",
+        "transaction_id": "5Mx10EEnyZUsfqbH"}], "pending": true, "merchant_external_reference":
+        "R368883147", "status": "authorized", "order_id": "R368883147", "void": false,
+        "expires": "2017-03-04T20:17:08Z", "payable": 0, "merchant_id": "3VXA5KS4ZA7IZLA3",
+        "auth_hold": 42499, "refunded_amount": 0, "created": "2017-02-02T14:59:44Z",
+        "amount": 42499, "balance": 42499, "financing_program": "default_3_6_12"}'
+    http_version: 
+  recorded_at: Thu, 02 Feb 2017 20:17:09 GMT
+recorded_with: VCR 3.0.3
