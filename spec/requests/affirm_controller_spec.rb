@@ -9,7 +9,7 @@ RSpec.describe Spree::AffirmController do
     context 'when the order_id is not valid' do
       it "will raise an AR RecordNotFound" do
         expect {
-          post '/affirm/confirm', {
+          post '/affirm/confirm', params: {
             checkout_token: checkout_token,
             payment_method_id: payment_method.id,
             order_id: nil,
@@ -21,7 +21,7 @@ RSpec.describe Spree::AffirmController do
 
     context 'when the checkout_token is missing' do
       it "will redirect to the order current checkout state path" do
-        post '/affirm/confirm', {
+        post '/affirm/confirm', params: {
           checkout_token: nil,
           payment_method_id: payment_method.id,
           order_id: order.id,
@@ -35,7 +35,7 @@ RSpec.describe Spree::AffirmController do
       let(:order) { create(:completed_order_with_totals) }
 
       it 'will redirect to the order detail page' do
-        post '/affirm/confirm', {
+        post '/affirm/confirm', params: {
           checkout_token: checkout_token,
           payment_method_id: payment_method.id,
           order_id: order.id,
@@ -59,7 +59,7 @@ RSpec.describe Spree::AffirmController do
 
       it "redirect to the confirm page" do
         VCR.use_cassette 'callback_hook_authorize_success' do
-          post '/affirm/confirm', {
+          post '/affirm/confirm', params: {
             checkout_token: checkout_token,
             payment_method_id: payment_method.id,
             order_id: order.id,
@@ -74,7 +74,7 @@ RSpec.describe Spree::AffirmController do
   describe 'GET cancel' do
     context "with an order_id present" do
       it "will redirect to the current order checkout state" do
-        get '/affirm/cancel', {
+        get '/affirm/cancel', params: {
           payment_method_id: payment_method.id,
           order_id: order.id,
           use_route: :spree
