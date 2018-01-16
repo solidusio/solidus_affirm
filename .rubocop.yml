@@ -44,9 +44,6 @@ Performance/Count:
 Style/RaiseArgs:
   Enabled: false
 
-Style/OpMethod:
-  Enabled: false
-
 # We can use good judgement here
 Style/RegexpLiteral:
   Enabled: false
@@ -231,3 +228,7 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*.rb'
     - '*.gemspec'
+
+Naming/BinaryOperatorParameterName:
+  Enabled: false
+
