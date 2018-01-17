@@ -36,5 +36,37 @@ module SolidusAffirm
     def auto_capture
       false
     end
+
+    # Will either refund or void the payment depending on its state.
+    #
+    # If the transaction has not yet been captured, we can void the transaction.
+    # Otherwise, we need to issue a refund.
+    def cancel(charge_id)
+      provider
+
+      begin
+        transaction = ::Affirm::Charge.find(charge_id)
+      # workaround: on 404 responses we get XML data from the API.
+      # the affirm-ruby gem doesn't handle non-JSON responses at the moment.
+      rescue NoMethodError
+        return ActiveMerchant::Billing::Response.new(false, "Affirm charge not found")
+      end
+
+      unless transaction.success?
+        return ActiveMerchant::Billing::Response.new(false, transaction.error.message)
+      end
+
+      if voidable?(transaction)
+        void(charge_id, nil, {})
+      else
+        credit(nil, charge_id, {})
+      end
+    end
+
+    private
+
+    def voidable?(transaction)
+      transaction.status == "authorized"
+    end
   end
 end
