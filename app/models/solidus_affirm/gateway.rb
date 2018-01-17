@@ -41,7 +41,7 @@ module SolidusAffirm
     #
     # If the transaction has not yet been captured, we can void the transaction.
     # Otherwise, we need to issue a refund.
-    def cancel(charge_id)
+    def cancel(charge_id, try_credit = true)
       provider
 
       begin
@@ -59,8 +59,12 @@ module SolidusAffirm
       if voidable?(transaction)
         void(charge_id, nil, {})
       else
-        credit(nil, charge_id, {})
+        try_credit ? credit(nil, charge_id, {}) : false
       end
+    end
+
+    def try_void(charge_id)
+      cancel(charge_id, false)
     end
 
     private
