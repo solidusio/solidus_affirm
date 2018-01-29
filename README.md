@@ -1,5 +1,7 @@
 # SolidusAffirm
 
+[![Build Status](https://travis-ci.org/solidusio-contrib/solidus_affirm.svg?branch=master)](https://travis-ci.org/solidusio-contrib/solidus_affirm)
+
 This extension provides the [Affirm](https://www.affirm.com/) payment option
 for your Solidus storefront by implementing the [Affirm Direct API](https://docs.affirm.com/Integrate_Affirm/Direct_API)
 
@@ -8,7 +10,7 @@ for your Solidus storefront by implementing the [Affirm Direct API](https://docs
 Add solidus_affirm to your Gemfile:
 
 ```ruby
-gem 'solidus_affirm', github: 'StemboltHQ/solidus_affirm'
+gem 'solidus_affirm', github: 'solidusio-contrib/solidus_affirm'
 ```
 
 Bundle your dependencies and run the installation generator:
@@ -157,4 +159,4 @@ Simply add this require statement to your spec_helper:
 require 'solidus_affirm/factories'
 ```
 
-Copyright (c) 2017 Stembolt, released under the New BSD License
+Copyright (c) 2018 Stembolt, released under the New BSD License
