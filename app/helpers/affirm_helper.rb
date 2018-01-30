@@ -1,6 +1,4 @@
 module AffirmHelper
-  include Spree::Core::Engine.routes.url_helpers
-
   def affirm_js_setup(public_api_key, javascript_url)
     output = %(
       var _affirm_config = {
@@ -14,8 +12,8 @@ module AffirmHelper
 
   def affirm_payload_json(order, payment_method, metadata = {})
     config = {
-      confirmation_url: confirm_affirm_url(payment_method_id: payment_method.id, order_id: order.id),
-      cancel_url: cancel_affirm_url(payment_method_id: payment_method.id, order_id: order.id)
+      confirmation_url: spree.confirm_affirm_url(payment_method_id: payment_method.id, order_id: order.id),
+      cancel_url: spree.cancel_affirm_url(payment_method_id: payment_method.id, order_id: order.id)
     }
     payload = SolidusAffirm::CheckoutPayload.new(order, config, metadata)
     SolidusAffirm::Config.checkout_payload_serializer.new(payload, root: false).to_json
