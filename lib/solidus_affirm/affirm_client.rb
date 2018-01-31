@@ -32,7 +32,7 @@ module SolidusAffirm
       end
     end
 
-    def void(_money, charge_id, _options = {})
+    def void(charge_id, _money, _options = {})
       response = ::Affirm::Charge.void(charge_id)
       if response.success?
         return ActiveMerchant::Billing::Response.new(true, "Transaction Voided")
