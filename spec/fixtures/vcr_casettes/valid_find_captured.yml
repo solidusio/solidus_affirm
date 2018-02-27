@@ -1,0 +1,74 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://sandbox.affirm.com/api/v2/charges/N330-Z6D4
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Authorization:
+      - Basic WFBTUTNDQTdQTE43Q0pDSzp3OW14a1FVcnlLalRZRHFPZlN2WVRlVEdvTElVUktwVQ==
+      User-Agent:
+      - Faraday v0.9.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 17 Jan 2018 13:44:59 GMT
+      Server:
+      - openresty
+      Strict-Transport-Security:
+      - max-age=86400
+      X-Affirm-Request-Id:
+      - '0884af71-a34a-490b-c9a4-a419d894a8ee'
+      Content-Length:
+      - '2576'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"currency": "USD", "id": "N330-Z6D4", "under_dispute": false, "user_id":
+        "7058-0675-OWZI", "details": {"merchant": {"public_api_key": "XPSQ3CA7PLN7CJCK",
+        "user_cancel_url": "http://localhost:3000/affirm/cancel?order_id=12&payment_method_id=4",
+        "user_confirmation_url": "http://localhost:3000/affirm/confirm?order_id=12&payment_method_id=4",
+        "name": "[TEST] Stembolt"}, "tax_amount": 2024, "billing": {"name": {"full":
+        "Peter Berkenbosch", "last": "Berkenbosch", "first": "Peter"}, "address":
+        {"city": "New York", "country": "USA", "zipcode": "10001", "line1": "20 W
+        29th St", "line2": "", "state": "NY"}}, "checkout_type": "merchant", "order_id":
+        "R368883147", "items": {"ROR-00011": {"sku": "ROR-00011", "item_url": "http://9cfb58bc.ngrok.io/products/ruby-on-rails-tote",
+        "display_name": "Ruby on Rails Tote", "unit_price": 1599, "qty": 25, "item_type":
+        "physical", "item_image_url": "/spree/products/21/large/ror_tote.jpeg?1485939804"}},
+        "shipping": {"name": {"full": "Peter Berkenbosch", "last": "Berkenbosch",
+        "first": "Peter"}, "address": {"city": "New York", "country": "USA", "zipcode":
+        "10001", "line1": "20 W 29th St", "line2": "", "state": "NY"}}, "currency":
+        "USD", "meta": {"release": "true", "user_timezone": "America/New_York", "__affirm_tracking_uuid":
+        "35f9a44b-586a-46e9-bdd2-1cf76804f756"}, "shipping_amount": 500, "total":
+        42499, "config": {}, "api_version": "v2", "merchant_external_reference": "R368883147"},
+        "refundable": true, "charge_event_count": 0, "events": [{"created": "2017-02-02T20:17:07Z",
+        "currency": "USD", "amount": 42499, "type": "auth", "id": "Q9QRCO9ZKTBVGME4",
+        "transaction_id": "5Mx10EEnyZUsfqbH"}, {"fee": 1275, "created": "2017-02-02T20:46:12Z",
+        "currency": "USD", "amount": 42499, "type": "capture", "id": "7DOHCZFER4H7JM99",
+        "transaction_id": "Vdoadw3u72HiW1LP"}, {"created": "2017-02-02T21:11:09Z",
+        "fee_refunded": 30, "currency": "USD", "amount": 1000, "type": "refund", "id":
+        "Q9V5OSY77YIZN8S0", "transaction_id": "tFpFOCQrW3b8UxDU"}, {"created": "2017-02-12T20:32:03Z",
+        "fee_refunded": 300, "currency": "USD", "amount": 10000, "type": "refund",
+        "id": "VAY5XGUBO91LR7FI", "transaction_id": "eheCV4sVKPlBIXWe"}], "pending":
+        false, "merchant_external_reference": "R368883147", "status": "partially refunded",
+        "order_id": "R368883147", "void": false, "expires": "2017-03-04T20:17:08Z",
+        "payable": 30554, "merchant_id": "3VXA5KS4ZA7IZLA3", "refund_expires": "2017-06-02T20:46:12Z",
+        "auth_hold": 0, "refunded_amount": 11000, "created": "2017-02-02T14:59:44Z",
+        "amount": 42499, "balance": 31499, "financing_program": "default_3_6_12"}'
+    http_version: 
+  recorded_at: Wed, 17 Jan 2018 13:44:59 GMT
+recorded_with: VCR 4.0.0
