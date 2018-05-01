@@ -141,7 +141,7 @@ RSpec.describe SolidusAffirm::CheckoutPayloadSerializer do
 
     context 'on an order with promotions' do
       before do
-        expect(order).to receive(:promo_total).and_return(BigDecimal.new("100.00"))
+        expect(order).to receive(:promo_total).and_return(BigDecimal("100.00"))
       end
 
       it "will aggregate the promotions into the discounts key" do

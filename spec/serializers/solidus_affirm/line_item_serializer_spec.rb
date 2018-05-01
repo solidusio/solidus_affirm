@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe SolidusAffirm::LineItemSerializer do
-  let(:line_item) { create(:line_item, price: BigDecimal.new('14.99')) }
+  let(:line_item) { create(:line_item, price: BigDecimal('14.99')) }
   let(:serializer) { SolidusAffirm::LineItemSerializer.new(line_item, root: false) }
   subject { JSON.parse(serializer.to_json) }
 
