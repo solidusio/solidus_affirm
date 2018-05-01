@@ -17,10 +17,4 @@ group :development, :test do
   gem "pry-rails"
 end
 
-group :test do
-  if branch == 'v1.4'
-   gem 'rails_test_params_backport', group: :test
-  end
-end
-
 gemspec
