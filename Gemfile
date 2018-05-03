@@ -4,17 +4,13 @@ branch = ENV.fetch('SOLIDUS_BRANCH', 'master')
 
 gem 'solidus', github: 'solidusio/solidus', branch: branch
 
+gem "rails-controller-testing", group: :test
+
 gem 'mysql2'
 gem 'pg', '~> 0.21'
 
 group :development, :test do
   gem "pry-rails"
-end
-
-group :test do
-  if branch == 'v1.4'
-   gem 'rails_test_params_backport', group: :test
-  end
 end
 
 gemspec
