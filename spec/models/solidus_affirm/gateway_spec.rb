@@ -50,7 +50,7 @@ RSpec.describe SolidusAffirm::Gateway do
   describe "#try_void" do
     let(:transaction_id) { "fake_transaction_id" }
 
-    subject(:try_void) { gateway.try_void(transaction_id) }
+    subject(:try_void) { gateway.try_void(instance_double('Spree::Payment', response_code: transaction_id)) }
 
     context "when the transaction is found" do
       context "and it is voidable" do
