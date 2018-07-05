@@ -63,8 +63,8 @@ module SolidusAffirm
       end
     end
 
-    def try_void(charge_id)
-      cancel(charge_id, false)
+    def try_void(payment)
+      cancel(payment.response_code, false)
     end
 
     private
