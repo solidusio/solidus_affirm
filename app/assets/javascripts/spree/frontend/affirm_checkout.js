@@ -26,7 +26,7 @@
           handle continue button clicks with .open()
       \*****************************************************/
       $('#checkout_form_payment').submit(function(e){
-        var checkedPaymentMethod = $('div[data-hook="checkout_payment_step"] input[type="radio"]:checked').val();
+        var checkedPaymentMethod = $('#payment-method-fields input[type="radio"]:checked').val();
         var affirmPaymentMethodId = $("#affirm_checkout_payload").data("paymentgateway")
         if (affirmPaymentMethodId.toString() === checkedPaymentMethod) {
           var $submit_button = $(this).find("input[type='submit']");
