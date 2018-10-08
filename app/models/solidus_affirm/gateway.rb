@@ -1,12 +1,13 @@
 module SolidusAffirm
-  class Gateway < Spree::Gateway
+  class Gateway < ::Spree::PaymentMethod
     preference :public_api_key, :string
     preference :private_api_key, :string
     preference :javascript_url, :string
 
-    def provider_class
+    def gateway_class
       AffirmClient
     end
+    alias_method :provider_class, :gateway_class
 
     def payment_source_class
       SolidusAffirm::Checkout
@@ -16,9 +17,10 @@ module SolidusAffirm
       true
     end
 
-    def method_type
+    def partial_name
       'affirm'
     end
+    alias_method :method_type, :partial_name
 
     def supports?(source)
       source.is_a? payment_source_class
@@ -42,7 +44,7 @@ module SolidusAffirm
     # If the transaction has not yet been captured, we can void the transaction.
     # Otherwise, we need to issue a refund.
     def cancel(charge_id, try_credit = true)
-      provider
+      gateway
 
       begin
         transaction = ::Affirm::Charge.find(charge_id)
