@@ -60,6 +60,7 @@ module SolidusAffirm
 
     def metadata
       return nil if object.metadata.empty?
+
       object.metadata
     end
   end

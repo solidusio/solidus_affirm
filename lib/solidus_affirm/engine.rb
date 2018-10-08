@@ -18,6 +18,7 @@ module SolidusAffirm
     initializer 'spree.solidus_affirm.action_controller' do |_app|
       ActiveSupport.on_load :action_controller do |klass|
         next if klass.name == "ActionController::API"
+
         helper AffirmHelper
       end
     end
