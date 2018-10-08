@@ -1,5 +1,5 @@
 module SolidusAffirm
-  class Checkout < ActiveRecord::Base
+  class Checkout < SolidusSupport.payment_source_parent_class
     self.table_name = "affirm_checkouts"
 
     def actions

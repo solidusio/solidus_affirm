@@ -1,5 +1,5 @@
 module SolidusAffirm
-  class Gateway < ::Spree::PaymentMethod
+  class Gateway < SolidusSupport.payment_method_parent_class
     preference :public_api_key, :string
     preference :private_api_key, :string
     preference :javascript_url, :string
@@ -44,7 +44,7 @@ module SolidusAffirm
     # If the transaction has not yet been captured, we can void the transaction.
     # Otherwise, we need to issue a refund.
     def cancel(charge_id, try_credit = true)
-      gateway
+      initialize_gateway
 
       begin
         transaction = ::Affirm::Charge.find(charge_id)
@@ -73,6 +73,13 @@ module SolidusAffirm
 
     def voidable?(transaction)
       transaction.status == "authorized"
+    end
+
+    def initialize_gateway
+      # We can just leave gateway after Solidus 2.2 EOL
+      return gateway if respond_to?(:gateway)
+
+      provider
     end
   end
 end
