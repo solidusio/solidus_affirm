@@ -1,12 +1,13 @@
 module SolidusAffirm
-  class Gateway < Spree::Gateway
+  class Gateway < SolidusSupport.payment_method_parent_class
     preference :public_api_key, :string
     preference :private_api_key, :string
     preference :javascript_url, :string
 
-    def provider_class
+    def gateway_class
       AffirmClient
     end
+    alias_method :provider_class, :gateway_class
 
     def payment_source_class
       SolidusAffirm::Checkout
@@ -16,9 +17,10 @@ module SolidusAffirm
       true
     end
 
-    def method_type
+    def partial_name
       'affirm'
     end
+    alias_method :method_type, :partial_name
 
     def supports?(source)
       source.is_a? payment_source_class
@@ -42,7 +44,7 @@ module SolidusAffirm
     # If the transaction has not yet been captured, we can void the transaction.
     # Otherwise, we need to issue a refund.
     def cancel(charge_id, try_credit = true)
-      provider
+      initialize_gateway
 
       begin
         transaction = ::Affirm::Charge.find(charge_id)
@@ -71,6 +73,13 @@ module SolidusAffirm
 
     def voidable?(transaction)
       transaction.status == "authorized"
+    end
+
+    def initialize_gateway
+      # We can just leave gateway after Solidus 2.2 EOL
+      return gateway if respond_to?(:gateway)
+
+      provider
     end
   end
 end

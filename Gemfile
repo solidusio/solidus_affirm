@@ -15,12 +15,14 @@ group :development, :test do
 end
 
 group :test do
-  gem 'rails-controller-testing'
-  if branch < "v2.5"
-    gem 'factory_bot', '4.10.0'
+  factory_bot_version = if branch < 'v2.5'
+    '4.10.0'
   else
-    gem 'factory_bot', '> 4.10.0'
+    '> 4.10.0'
   end
+
+  gem 'factory_bot', factory_bot_version
+  gem 'rails-controller-testing'
 end
 
 gemspec
