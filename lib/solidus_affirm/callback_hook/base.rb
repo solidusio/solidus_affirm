@@ -6,7 +6,7 @@ module SolidusAffirm
         authorized_affirm = Affirm::Charge.find(payment.response_code)
         payment.amount = authorized_affirm.amount / 100.0
         payment.save!
-        payment.order.next!
+        payment.order.next! if payment.order.payment?
       end
 
       def after_authorize_url(order)
