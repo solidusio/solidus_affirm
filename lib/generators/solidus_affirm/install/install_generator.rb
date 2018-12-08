@@ -13,10 +13,6 @@ module SolidusAffirm
         inject_into_file 'vendor/assets/stylesheets/spree/backend/all.css', " *= require spree/backend/solidus_affirm\n", before: /\*\//, verbose: true
       end
 
-      def add_gateway
-        append_file 'config/initializers/spree.rb', "Rails.application.config.spree.payment_methods << SolidusAffirm::Gateway"
-      end
-
       def add_migrations
         run 'bundle exec rake railties:install:migrations FROM=solidus_affirm'
       end
