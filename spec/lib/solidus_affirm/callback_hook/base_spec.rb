@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 RSpec.describe SolidusAffirm::CallbackHook::Base do
-  let(:order) { create(:order_with_totals, state: "payment") }
+  let(:order) { create(:order_with_totals, state: order_state) }
+  let(:order_state) { "payment" }
   let(:payment_method) do
     create(
       :affirm_payment_gateway,
@@ -38,9 +39,21 @@ RSpec.describe SolidusAffirm::CallbackHook::Base do
         end
       end
 
-      it "moves the order to the next state" do
-        VCR.use_cassette 'callback_hook_authorize_success' do
-          expect { subject.authorize!(payment) }.to change{ order.state }.from("payment").to("confirm")
+      context "when order state is payment" do
+        it "moves the order to the next state" do
+          VCR.use_cassette 'callback_hook_authorize_success' do
+            expect { subject.authorize!(payment) }.to change{ order.state }.from("payment").to("confirm")
+          end
+        end
+      end
+
+      context "when order state is not payment" do
+        let(:order_state) { "confirm" }
+
+        it "doesn't raise a StateMachines::InvalidTransition exception" do
+          VCR.use_cassette 'callback_hook_authorize_success' do
+            expect { subject.authorize!(payment) }.not_to raise_error(StateMachines::InvalidTransition)
+          end
         end
       end
     end
