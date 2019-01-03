@@ -16,8 +16,12 @@ describe Spree::Api::OrdersController, type: :request do
       context "for affrim payment" do
         let!(:order) { create(:order_ready_to_ship, payment_type: :captured_affirm_payment) }
 
-        it "can render" do
-          expect(response).to render_template partial: 'spree/api/payments/source_views/_affirm'
+        it "can be rendered correctly" do
+          if Gem::Requirement.new('>= 2.6').satisfied_by?(SolidusSupport.solidus_gem_version)
+            expect(response).to render_template partial: 'spree/api/payments/source_views/_affirm'
+          else
+            expect(response).to render_template 'spree/api/orders/show'
+          end
         end
       end
     end
