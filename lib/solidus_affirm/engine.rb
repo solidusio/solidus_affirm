@@ -26,5 +26,9 @@ module SolidusAffirm
         helper AffirmHelper
       end
     end
+
+    if SolidusSupport.api_available?
+      paths["app/views"] << "lib/views/api"
+    end
   end
 end
