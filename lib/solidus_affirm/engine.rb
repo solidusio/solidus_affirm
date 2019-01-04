@@ -11,6 +11,13 @@ module SolidusAffirm
 
     config.autoload_paths += %W(#{config.root}/lib)
 
+    config.after_initialize do
+      versions_without_api_custom_source_templates = Gem::Requirement.new('< 2.6')
+      if versions_without_api_custom_source_templates.satisfied_by?(SolidusSupport.solidus_gem_version)
+        require_dependency 'solidus_affirm/backward_compatibility_hacks/api_template'
+      end
+    end
+
     initializer "spree.solidus_affirm.environment", before: :load_config_initializers do |_app|
       SolidusAffirm::Config = SolidusAffirm::Configuration.new
     end
@@ -25,6 +32,10 @@ module SolidusAffirm
 
         helper AffirmHelper
       end
+    end
+
+    if SolidusSupport.api_available?
+      paths["app/views"] << "lib/views/api"
     end
   end
 end
