@@ -17,10 +17,10 @@ Style/ClassVars:
   Enabled: false
 
 # We need these names for backwards compatability
-Style/PredicateName:
+Naming/PredicateName:
   Enabled: false
 
-Style/AccessorMethodName:
+Naming/AccessorMethodName:
   Enabled: false
 
 # This has been used for customization
@@ -53,7 +53,7 @@ Style/RegexpLiteral:
 Style/AsciiComments:
   Enabled: false
 
-Lint/EndAlignment:
+Layout/EndAlignment:
   Enabled: false
 
 Layout/ElseAlignment:
