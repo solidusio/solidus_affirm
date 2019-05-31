@@ -117,4 +117,10 @@ RSpec.describe SolidusAffirm::Checkout do
       end
     end
   end
+
+  describe "#reusable?" do
+    it "is never reusable" do
+      expect(subject.reusable?).to eq(false)
+    end
+  end
 end
