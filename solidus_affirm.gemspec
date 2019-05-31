@@ -23,11 +23,12 @@ Gem::Specification.new do |s|
   s.add_dependency "solidus_support", '>= 0.2.2'
 
   s.add_development_dependency 'capybara', '~> 2.18'
+  s.add_development_dependency "capybara-screenshot"
   s.add_development_dependency 'coffee-rails'
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'factory_bot'
   s.add_development_dependency 'ffaker'
-  s.add_development_dependency 'poltergeist'
+  s.add_development_dependency 'selenium-webdriver'
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'rubocop', '>= 0.38'
   s.add_development_dependency 'rubocop-rspec', '1.4.0'

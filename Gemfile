@@ -15,6 +15,8 @@ group :development, :test do
 end
 
 group :test do
+  gem 'solidus_support', github: 'solidusio/solidus_support'
+
   factory_bot_version = if branch < 'v2.5'
     '4.10.0'
   else

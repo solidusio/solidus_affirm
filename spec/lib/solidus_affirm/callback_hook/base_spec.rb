@@ -52,7 +52,7 @@ RSpec.describe SolidusAffirm::CallbackHook::Base do
 
         it "doesn't raise a StateMachines::InvalidTransition exception" do
           VCR.use_cassette 'callback_hook_authorize_success' do
-            expect { subject.authorize!(payment) }.not_to raise_error(StateMachines::InvalidTransition)
+            expect { subject.authorize!(payment) }.not_to raise_error
           end
         end
       end
