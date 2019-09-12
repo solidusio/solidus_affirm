@@ -9,8 +9,6 @@ module SolidusAffirm
       g.test_framework :rspec
     end
 
-    config.autoload_paths += %W(#{config.root}/lib)
-
     config.after_initialize do
       versions_without_api_custom_source_templates = Gem::Requirement.new('< 2.6')
       if versions_without_api_custom_source_templates.satisfied_by?(SolidusSupport.solidus_gem_version)
