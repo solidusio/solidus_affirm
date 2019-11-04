@@ -1,6 +1,6 @@
 # SolidusAffirm
 
-[![CircleCI](https://circleci.com/gh/solidusio-contrib/solidus_affirm.svg?style=svg)](https://circleci.com/gh/solidusio-contrib/solidus_affirm)
+[![CircleCI](https://circleci.com/gh/solidusio/solidus_affirm.svg?style=svg)](https://circleci.com/gh/solidusio/solidus_affirm)
 
 This extension provides the [Affirm](https://www.affirm.com/) payment option
 for your Solidus storefront by implementing the [Affirm Direct API](https://docs.affirm.com/Integrate_Affirm/Direct_API)
