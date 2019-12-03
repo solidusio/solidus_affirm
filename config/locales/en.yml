@@ -1,4 +1,7 @@
 en:
+  activerecord:
+    models:
+      solidus_affirm/gateway: Affirm
   spree:
     public_api_key: Public API Key
     private_api_key: Private API Key
