@@ -5,6 +5,8 @@
 This extension provides the [Affirm](https://www.affirm.com/) payment option
 for your Solidus storefront by implementing the [Affirm Direct API](https://docs.affirm.com/Integrate_Affirm/Direct_API)
 
+There is additional documenation available at the [Affirm documentation website](https://docs.affirm.com/Integrate_Affirm/Platform_Integration/Solidus_Integration)
+
 ## Installation
 
 Add solidus_affirm to your Gemfile:
