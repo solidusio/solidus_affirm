@@ -1,7 +1,13 @@
+# frozen_string_literal: true
+
+require 'spree/core'
+
 module SolidusAffirm
   class Engine < Rails::Engine
-    require 'spree/core'
-    isolate_namespace Spree
+    include SolidusSupport::EngineExtensions::Decorators
+
+    isolate_namespace ::Spree
+
     engine_name 'solidus_affirm'
 
     # use rspec for tests
