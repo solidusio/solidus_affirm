@@ -1,5 +1,5 @@
 <% if SolidusAffirm::Gateway.first.present? %>
   <% content_for :head do %>
-    <%= affirm_js_setup(SolidusAffirm::Gateway.first.preferences[:public_api_key], SolidusAffirm::Gateway.first.preferences[:javascript_url]) %>
+    <%= affirm_js_setup(SolidusAffirm::Gateway.first.preferred_public_api_key, SolidusAffirm::Gateway.first.preferred_javascript_url) %>
   <% end %>
 <% end %>

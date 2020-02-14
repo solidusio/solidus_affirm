@@ -41,6 +41,37 @@ Make sure that during development and testing you use the sandbox version:
 * Sandbox = https://cdn1-sandbox.affirm.com/js/v2/affirm.js
 * Live = https://cdn1.affirm.com/js/v2/affirm.js
 
+### Configure via database configuration
+
+If you want to store your Affirm credentials in the database just
+fill the new fields in the form, selecting `custom` (default) in the
+Preference Source field.
+
+### Configure via static configuration
+
+If you want to store your credentials into your codebase or use ENV
+variables you can create the following static configuration:
+
+```ruby
+# config/initializers/spree.rb
+
+Spree.config do |config|
+  # ...
+  config.static_model_preferences.add(
+    SolidusAffirm::Gateway,
+    'affirm_env_credentials',
+    public_api_key: ENV['AFFIRM_PUBLIC_KEY'],
+    private_api_key: ENV['AFFIRM_PRIVATE_KEY'],
+    javascript_url: ENV['AFFIRM_JS_RUNTIME_URL'],
+    test_mode: !Rails.env.production?
+  )
+end
+```
+
+Once your server has been restarted, you can select `affirm_env_credentials` in
+the Preference Source field. After saving, your application will start using the
+static configuration to process Affirm payments.
+
 ## Hooks and extension points
 
 We provide a configuration class the allows you customize the complete setup.
