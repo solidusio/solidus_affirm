@@ -29,7 +29,6 @@ module SolidusAffirm
       @order = order
       @config = config
       @metadata = metadata
-      prepare_payments
     end
 
     def ship_address
@@ -42,11 +41,6 @@ module SolidusAffirm
 
     def items
       order.line_items
-    end
-
-    private
-    def prepare_payments
-      @order.payments.where(source_type: 'SolidusAffirm::Checkout').pending.collect(&:cancel!)
     end
   end
 end
