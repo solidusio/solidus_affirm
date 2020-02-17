@@ -46,7 +46,7 @@ module SolidusAffirm
 
     private
     def prepare_payments
-      @order.payments.where(source_type: 'SolidusAffirm::Checkout').pending.collect(&:void)
+      @order.payments.where(source_type: 'SolidusAffirm::Checkout').pending.collect(&:cancel!)
     end
   end
 end
