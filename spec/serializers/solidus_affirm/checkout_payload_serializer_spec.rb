@@ -167,4 +167,13 @@ RSpec.describe SolidusAffirm::CheckoutPayloadSerializer do
       end
     end
   end
+
+  context 'with apostrophes in name' do
+    let(:shipping_address) { create(:ship_address, firstname: "John's", lastname: "Do", zipcode: "52106-9133") }
+    it "renders a valid JSON" do
+      shipping_name_json = { "first" => "John's", "last" => "Do" }
+      expect(subject['shipping']["name"]).to eql shipping_name_json
+    end
+  end
+
 end

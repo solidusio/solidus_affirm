@@ -16,6 +16,6 @@ module AffirmHelper
       cancel_url: spree.cancel_affirm_url(payment_method_id: payment_method.id, order_id: order.id)
     }
     payload = SolidusAffirm::CheckoutPayload.new(order, config, metadata)
-    SolidusAffirm::Config.checkout_payload_serializer.new(payload, root: false).to_json
+    SolidusAffirm::Config.checkout_payload_serializer.new(payload, root: false).to_json.gsub("'","\u2019")
   end
 end
