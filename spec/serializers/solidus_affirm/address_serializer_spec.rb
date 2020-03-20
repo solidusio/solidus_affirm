@@ -25,4 +25,12 @@ RSpec.describe SolidusAffirm::AddressSerializer do
       expect(subject["address"]).to eql address_json
     end
   end
+
+  context "with apostrophes in first or lastname" do
+    let(:address) { create(:address, firstname: "John's", lastname: "D'o", zipcode: "58451") }
+    it "will serialize correctly" do
+      name_json = { "first" => "John's", "last" => "D'o" }
+      expect(subject["name"]).to eql name_json
+    end
+  end
 end
