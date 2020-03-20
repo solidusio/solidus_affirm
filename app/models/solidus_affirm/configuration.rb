@@ -31,5 +31,10 @@ module SolidusAffirm
     def checkout_payload_serializer
       @checkout_payload_serializer ||= SolidusAffirm::CheckoutPayloadSerializer
     end
+
+    attr_writer :exchange_lease_enabled
+    def exchange_lease_enabled
+      @exchange_lease_enabled ||= false
+    end
   end
 end

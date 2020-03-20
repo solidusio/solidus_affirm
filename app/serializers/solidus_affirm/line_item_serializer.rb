@@ -2,7 +2,11 @@ require 'active_model_serializers'
 
 module SolidusAffirm
   class LineItemSerializer < ActiveModel::Serializer
-    attributes :display_name, :sku, :unit_price, :qty, :item_image_url, :item_url
+    attributes :display_name, :sku, :unit_price, :qty, :item_image_url, :item_url, :leasable
+
+    def leasable
+      true
+    end
 
     def display_name
       object.name

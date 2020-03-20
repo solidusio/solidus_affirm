@@ -13,7 +13,8 @@ module AffirmHelper
   def affirm_payload_json(order, payment_method, metadata = {})
     config = {
       confirmation_url: spree.confirm_affirm_url(payment_method_id: payment_method.id, order_id: order.id),
-      cancel_url: spree.cancel_affirm_url(payment_method_id: payment_method.id, order_id: order.id)
+      cancel_url: spree.cancel_affirm_url(payment_method_id: payment_method.id, order_id: order.id),
+      exchange_lease_enabled: SolidusAffirm::Config.exchange_lease_enabled
     }
     payload = SolidusAffirm::CheckoutPayload.new(order, config, metadata)
     SolidusAffirm::Config.checkout_payload_serializer.new(payload, root: false).to_json

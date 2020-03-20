@@ -8,7 +8,8 @@ module SolidusAffirm
     def merchant
       hsh = {
         user_confirmation_url: object.config[:confirmation_url],
-        user_cancel_url: object.config[:cancel_url]
+        user_cancel_url: object.config[:cancel_url],
+        exchange_lease_enabled: object.config[:exchange_lease_enabled]
       }
       hsh[:name] = object.config[:name] if object.config[:name].present?
       hsh
