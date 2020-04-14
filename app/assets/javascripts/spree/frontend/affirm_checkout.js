@@ -40,7 +40,7 @@
           $submit_button.trigger("loading");
 
           // submit the checkout
-          affirm.checkout.post();
+          affirm.checkout.open();
 
           e.preventDefault();
           return false;
