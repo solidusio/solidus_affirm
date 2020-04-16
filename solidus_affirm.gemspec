@@ -29,11 +29,10 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency 'active_model_serializers', '~> 0.10'
-  s.add_dependency 'affirm-ruby', '1.1.0'
+  s.add_dependency 'affirm-ruby-api', '~> 1.0'
   s.add_dependency 'solidus_core', ['>= 2.0', '< 3']
   s.add_dependency "solidus_support", '>= 0.2.2'
 
   s.add_development_dependency 'solidus_dev_support'
-  s.add_development_dependency 'vcr'
   s.add_development_dependency 'webmock'
 end

@@ -47,15 +47,11 @@ module SolidusAffirm
       initialize_gateway
 
       begin
-        transaction = ::Affirm::Charge.find(charge_id)
-      # workaround: on 404 responses we get XML data from the API.
-      # the affirm-ruby gem doesn't handle non-JSON responses at the moment.
-      rescue NoMethodError
-        return ActiveMerchant::Billing::Response.new(false, "Affirm charge not found")
-      end
-
-      unless transaction.success?
-        return ActiveMerchant::Billing::Response.new(false, transaction.error.message)
+        transaction = ::Affirm::Client.new.read_transaction(charge_id)
+        # workaround: on 404 responses we get XML data from the API.
+        # the affirm-ruby gem doesn't handle non-JSON responses at the moment.
+      rescue Exception => e
+        return ActiveMerchant::Billing::Response.new(false, e.message)
       end
 
       if voidable?(transaction)
