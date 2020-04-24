@@ -1,5 +1,8 @@
 module SolidusAffirm
   class Checkout < SolidusSupport.payment_source_parent_class
+
+    PROVIDERS = [:affirm, :katapult]
+
     self.table_name = "affirm_checkouts"
 
     def reusable?

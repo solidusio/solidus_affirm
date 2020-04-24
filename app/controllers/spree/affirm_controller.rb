@@ -14,7 +14,9 @@ module Spree
         return redirect_to spree.order_path(order), notice: "Order is already in complete state"
       end
 
-      affirm_checkout = SolidusAffirm::Checkout.new(token: checkout_token)
+      affirm_transaction = Affirm::Client.new.read_transaction(checkout_token)
+      provider = SolidusAffirm::Checkout::PROVIDERS[affirm_transaction.provider_id - 1]
+      affirm_checkout = SolidusAffirm::Checkout.new(token: checkout_token, provider: provider)
 
       affirm_checkout.transaction do
         if affirm_checkout.save!
@@ -24,6 +26,7 @@ module Spree
           })
           hook = SolidusAffirm::Config.callback_hook.new
           hook.authorize!(payment)
+          hook.remove_tax!(order) if provider == "katapult"
           redirect_to hook.after_authorize_url(order)
         end
       end
