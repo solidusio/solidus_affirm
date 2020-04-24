@@ -43,7 +43,7 @@ module SolidusAffirm
 
     def credit(money, charge_id, _options = {})
       begin
-        response = ::Affirm::Client.refund(charge_id, amount: money)
+        response = ::Affirm::Client.new.refund(charge_id, money)
         return ActiveMerchant::Billing::Response.new(true, "Transaction Credited with #{money}")
       rescue Exception => e
         return ActiveMerchant::Billing::Response.new(false, e.message)
