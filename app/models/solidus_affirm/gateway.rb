@@ -30,15 +30,6 @@ module SolidusAffirm
       false
     end
 
-    # Affirm doesn't have a purcase endpoint
-    # so autocapture doesn't make sense. Especially because you have to
-    # leave the store and come back to confirm your order. Stores should
-    # capture affirm payments after the order transitions to complete.
-    # @return false
-    def auto_capture
-      false
-    end
-
     # Will either refund or void the payment depending on its state.
     #
     # If the transaction has not yet been captured, we can void the transaction.
