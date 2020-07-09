@@ -1,0 +1,135 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandbox.affirm.com/api/v2/charges
+    body:
+      encoding: UTF-8
+      string: '{"checkout_token":"TY99U4HPNEAGNHE5"}'
+    headers:
+      Authorization:
+      - Basic NzJPMEEwV01ISkgwVEJUNjpQaTRjVFFQTmpKVUZOOVNQRnlTd3lhTDNTMkhVZ0F2WQ==
+      User-Agent:
+      - Faraday v1.0.1
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 09 Jun 2020 20:13:47 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2886'
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Set-Cookie:
+      - 3060738.3440491=a55d41fa-48b0-4b10-b368-428b8202774b; Domain=.affirm.com;
+        Expires=Thu, 09-Jun-2022 20:13:47 GMT; Max-Age=63072000; Secure; Path=/; SameSite=None
+      - session=eyJjb250ZXh0X2FyaSI6IlRZOTlVNEhQTkVBR05IRTUifQ.EcF--w.IDhUq9tUlwrcPNHhKTYSczgYJGw;
+        Secure; HttpOnly; Path=/; SameSite=None
+      - tracker_device=a55d41fa-48b0-4b10-b368-428b8202774b; Domain=.affirm.com; Expires=Thu,
+        09-Jun-2022 20:13:47 GMT; Max-Age=63072000; Secure; Path=/; SameSite=None
+      X-Affirm-Request-Id:
+      - 93402e08-5177-42fe-c232-fe247f1ccc7a
+      Strict-Transport-Security:
+      - max-age=86400
+    body:
+      encoding: UTF-8
+      string: '{"currency": "USD", "id": "5NMN-62EB", "under_dispute": false, "user_id":
+        "5278-0800-OOEG", "platform": null, "details": {"merchant": {"public_api_key":
+        "72O0A0WMHJH0TBT6", "user_cancel_url": "http://localhost:8888/affirm/cancel?order_id=33443&payment_method_id=3",
+        "user_confirmation_url": "http://localhost:8888/affirm/confirm?order_id=33443&payment_method_id=3",
+        "name": "Alarm Grid"}, "financing_program_external_name": "standard_3_6_12",
+        "financing_program_name": "standard_3_6_12", "checkout_flow_type": "classic",
+        "checkout_type": "merchant", "billing": {"name": {"full": "fd fdas", "last":
+        "fdas", "first": "fd"}, "address": {"city": "LA", "country": "USA", "zipcode":
+        "90210", "line1": "fdsa", "line2": "", "state": "CA"}}, "order_id": "R522094156",
+        "items": {"L52-KT118-WIFI": {"sku": "L52-KT118-WIFI", "item_url": "http://localhost:3000/products/honeywell-l5200pk-wifi",
+        "display_name": "Honeywell L5200PK-WIFI - IP Security System Kit with WIFI
+        Communicator", "unit_price": 35899, "qty": 3, "item_type": "physical", "item_image_url":
+        "//s3.amazonaws.com/development.alarmgrid.com/images/large/honeywell-l5200pk-wifi-wireless-security-system-with-5811-wafer-.jpg?1490880848"}},
+        "metadata": {"checkout_channel_type": "online"}, "shipping": {"name": {"full":
+        "fd fdas", "last": "fdas", "first": "fd"}, "address": {"city": "LA", "country":
+        "USA", "zipcode": "90210", "line1": "fdsa", "line2": "", "state": "CA"}},
+        "currency": "USD", "meta": {"release": "false", "user_timezone": "America/Vancouver",
+        "__affirm_tracking_uuid": "b72fe793-6d7c-4d33-a5f7-f3e239339ac4"}, "shipping_amount":
+        1000, "mfp_rule_input_data": {"items": {"L52-KT118-WIFI": {"sku": "L52-KT118-WIFI",
+        "item_url": "http://localhost:3000/products/honeywell-l5200pk-wifi", "display_name":
+        "Honeywell L5200PK-WIFI - IP Security System Kit with WIFI Communicator",
+        "unit_price": 35899, "qty": 3, "item_type": "physical", "item_image_url":
+        "//s3.amazonaws.com/development.alarmgrid.com/images/large/honeywell-l5200pk-wifi-wireless-security-system-with-5811-wafer-.jpg?1490880848"}},
+        "total": 108697, "metadata": {"checkout_channel_type": "online"}}, "tax_amount":
+        0, "loan_type": "classic", "total": 108697, "config": {}, "api_version": "v2",
+        "merchant_external_reference": "R522094156"}, "refundable": false, "charge_event_count":
+        0, "events": [{"created": "2020-06-09T20:13:45Z", "currency": "USD", "amount":
+        108697, "type": "auth", "id": "HBGLF4GGRNN4SKFF", "transaction_id": "utMPtXDDga9ePEDz"}],
+        "pending": true, "merchant_external_reference": "R522094156", "status": "authorized",
+        "order_id": "R522094156", "void": false, "expires": "2020-06-23T20:13:46Z",
+        "payable": 0, "merchant_id": "LRNQSCHHNYFTQI55", "auth_hold": 108697, "refunded_amount":
+        0, "created": "2020-06-09T20:11:49Z", "is_instore": false, "amount": 108697,
+        "is_marqeta_charge": false, "balance": 108697, "financing_program": "standard_3_6_12"}'
+  recorded_at: Tue, 09 Jun 2020 20:13:47 GMT
+- request:
+    method: post
+    uri: https://sandbox.affirm.com/api/v2/charges/5NMN-62EB/capture
+    body:
+      encoding: UTF-8
+      string: "{}"
+    headers:
+      Authorization:
+      - Basic NzJPMEEwV01ISkgwVEJUNjpQaTRjVFFQTmpKVUZOOVNQRnlTd3lhTDNTMkhVZ0F2WQ==
+      User-Agent:
+      - Faraday v1.0.1
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 09 Jun 2020 20:13:48 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '168'
+      Connection:
+      - keep-alive
+      Server:
+      - openresty
+      Set-Cookie:
+      - 3060738.3440491=5e0dc0a9-5449-4f69-83b6-4ace20e87581; Domain=.affirm.com;
+        Expires=Thu, 09-Jun-2022 20:13:48 GMT; Max-Age=63072000; Secure; Path=/; SameSite=None
+      - session=eyJjb250ZXh0X2FyaSI6IjVOTU4tNjJFQiJ9.EcF-_A.6Tsqbi27X-lx__1rKiaLXLQRdIM;
+        Secure; HttpOnly; Path=/; SameSite=None
+      - tracker_device=5e0dc0a9-5449-4f69-83b6-4ace20e87581; Domain=.affirm.com; Expires=Thu,
+        09-Jun-2022 20:13:48 GMT; Max-Age=63072000; Secure; Path=/; SameSite=None
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      X-Affirm-Request-Id:
+      - 0e12709a-fb37-43cd-c374-c4187108a6d4
+      Strict-Transport-Security:
+      - max-age=86400
+    body:
+      encoding: UTF-8
+      string: '{"fee": 3587, "created": "2020-06-09T20:13:48Z", "currency": "USD",
+        "amount": 108697, "type": "capture", "id": "3DSE9EP0NRNIW61V", "transaction_id":
+        "DpQJVOEwox4Era91"}'
+  recorded_at: Tue, 09 Jun 2020 20:13:48 GMT
+recorded_with: VCR 6.0.0

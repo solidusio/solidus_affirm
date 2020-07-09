@@ -49,5 +49,11 @@ module SolidusAffirm
         return ActiveMerchant::Billing::Response.new(false, response.error.message)
       end
     end
+
+    def purchase(money, affirm_source, _options = {})
+      result = authorize(money, affirm_source, _options)
+      return result unless result.success?
+      capture(money, result.authorization, _options)
+    end
   end
 end

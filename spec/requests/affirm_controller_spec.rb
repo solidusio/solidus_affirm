@@ -57,15 +57,60 @@ RSpec.describe Spree::AffirmController do
       end
       let(:checkout_token) { "26VJRAAYE0MB0V25" }
 
-      it "redirect to the confirm page" do
-        VCR.use_cassette 'callback_hook_authorize_success' do
+      it "creates a payment" do
+        expect {
           post '/affirm/confirm', params: {
             checkout_token: checkout_token,
             payment_method_id: payment_method.id,
             order_id: order.id,
             use_route: :spree
           }
-          expect(response).to redirect_to('/checkout/confirm')
+        }.to change { order.payments.count }.from(0).to(1)
+      end
+
+      it "redirect to the confirm page" do
+        post '/affirm/confirm', params: {
+          checkout_token: checkout_token,
+          payment_method_id: payment_method.id,
+          order_id: order.id,
+          use_route: :spree
+        }
+        expect(response).to redirect_to('/checkout/confirm')
+      end
+
+      it "sets the payment total to the order total" do
+        post '/affirm/confirm', params: {
+          checkout_token: checkout_token,
+          payment_method_id: payment_method.id,
+          order_id: order.id,
+          use_route: :spree
+        }
+        expect(order.payments.last.amount).to eq(order.total)
+      end
+
+      it "moves the order to its next state" do
+        expect {
+          post '/affirm/confirm', params: {
+            checkout_token: checkout_token,
+            payment_method_id: payment_method.id,
+            order_id: order.id,
+            use_route: :spree
+          }
+        }.to change { order.reload.state }.from("payment").to("confirm")
+      end
+
+      context "the order is already in confirm state" do
+        let(:order) { create(:order_with_totals, state: "confirm") }
+
+        it "moves the order to its next state" do
+          expect {
+            post '/affirm/confirm', params: {
+              checkout_token: checkout_token,
+              payment_method_id: payment_method.id,
+              order_id: order.id,
+              use_route: :spree
+            }
+          }.not_to change { order.reload.state }
         end
       end
     end

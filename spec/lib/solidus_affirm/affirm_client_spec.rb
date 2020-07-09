@@ -125,4 +125,49 @@ RSpec.describe SolidusAffirm::AffirmClient do
       end
     end
   end
+
+  describe "#purchase" do
+    let(:checkout_token) { "TY99U4HPNEAGNHE5" }
+
+    it "will authorize the affirm payment with the checkout token" do
+      VCR.use_cassette("valid_purchase") do
+        response = subject.purchase(nil, affirm_payment_source, {})
+        expect(response.success?).to be_truthy
+      end
+    end
+
+    context "when the authorization fails" do
+      let(:checkout_token) { "FOOBAR" }
+
+      it "will return an unsuccesfull response" do
+        VCR.use_cassette("invalid_authorize") do
+          response = subject.purchase(nil, affirm_payment_source, {})
+          expect(response.success?).to be_falsey
+        end
+      end
+
+      it "will return the error message from Affirm in the response" do
+        VCR.use_cassette("invalid_authorize") do
+          response = subject.purchase(nil, affirm_payment_source, {})
+          expect(response.message).to eql "Invalid Request"
+        end
+      end
+    end
+
+    context "when the capture fails" do
+      it "will return an unsuccesfull response" do
+        VCR.use_cassette("purchase_invalid_capture") do
+          response = subject.purchase(nil, affirm_payment_source, {})
+          expect(response.success?).to be_falsey
+        end
+      end
+
+      it "will return the error message from Affirm in the response" do
+        VCR.use_cassette("purchase_invalid_capture") do
+          response = subject.purchase(nil, affirm_payment_source, {})
+          expect(response.message).to eql "Duplicate capture"
+        end
+      end
+    end
+  end
 end
