@@ -52,6 +52,13 @@ RSpec.describe SolidusAffirm::AffirmClient do
       end
     end
 
+    it "includes the charge_id" do
+      VCR.use_cassette("valid_capture") do
+        response = subject.capture(nil, charge_id, {})
+        expect(response.authorization).to eq charge_id
+      end
+    end
+
     context "with invalid data" do
       it "will return an unsuccesfull response" do
         VCR.use_cassette("invalid_capture") do
