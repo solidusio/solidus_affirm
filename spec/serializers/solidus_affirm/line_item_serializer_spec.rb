@@ -25,23 +25,18 @@ RSpec.describe SolidusAffirm::LineItemSerializer do
 
   describe "item_image_url" do
     context "with variant specific image" do
-      before do
-        expect(line_item.variant).to receive(:images).and_return([create(:image)]).twice
-      end
-
       it "will return the variant image url" do
-        expect(subject['item_image_url']).to match /\/spree\/products\/\d\/large\/thinking-cat.jpg/
+        expect(line_item.variant).to receive(:images).and_return([create(:image)]).twice
+        expect(subject['item_image_url']).to match /(blank|thinking-cat).jpg/
       end
     end
 
     context "when the variant does not have an image" do
-      before do
-        expect(line_item.variant).to receive(:images).and_return([])
-        expect(line_item.variant.product).to receive(:images).and_return([create(:image)]).twice
-      end
+      before { allow(line_item.variant).to receive(:images).and_return([]) }
 
       it "will return the master product image url" do
-        expect(subject['item_image_url']).to match /\/spree\/products\/\d\/large\/thinking-cat.jpg/
+        expect(line_item.variant.product).to receive(:images).and_return([create(:image)]).twice
+        expect(subject['item_image_url']).to match /(blank|thinking-cat).jpg/
       end
     end
   end
