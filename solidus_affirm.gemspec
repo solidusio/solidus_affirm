@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
 
   s.author = 'Peter Berkenbosch'
   s.email = 'peter@stembolt.com'
-  s.homepage = 'https://stembolt.com/'
+  s.homepage = 'https://github.com/solidusio/solidus_affirm'
 
   if s.respond_to?(:metadata)
     s.metadata["homepage_uri"] = s.homepage if s.homepage
