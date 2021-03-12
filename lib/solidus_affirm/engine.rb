@@ -17,7 +17,7 @@ module SolidusAffirm
 
     config.after_initialize do
       versions_without_api_custom_source_templates = Gem::Requirement.new('< 2.6')
-      if versions_without_api_custom_source_templates.satisfied_by?(SolidusSupport.solidus_gem_version)
+      if versions_without_api_custom_source_templates.satisfied_by?(Spree.solidus_gem_version)
         require_dependency 'solidus_affirm/backward_compatibility_hacks/api_template'
       end
     end
