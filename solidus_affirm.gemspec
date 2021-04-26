@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
 
   s.author = 'Peter Berkenbosch'
   s.email = 'peter@stembolt.com'
-  s.homepage = 'https://stembolt.com/'
+  s.homepage = 'https://github.com/solidusio/solidus_affirm'
 
   if s.respond_to?(:metadata)
     s.metadata["homepage_uri"] = s.homepage if s.homepage
@@ -30,8 +30,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'active_model_serializers', '~> 0.10'
   s.add_dependency 'affirm-ruby', '1.1.0'
-  s.add_dependency 'solidus_core', ['>= 2.0', '< 3']
-  s.add_dependency "solidus_support", '>= 0.2.2'
+  s.add_dependency 'solidus_core', ['>= 2.0', '< 4']
+  s.add_dependency "solidus_support", ['>= 0.8.1', '< 1']
 
   s.add_development_dependency 'solidus_dev_support'
   s.add_development_dependency 'vcr'

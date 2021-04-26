@@ -5,10 +5,18 @@ module SolidusAffirm
     attributes :name, :address
 
     def name
-      {
-        first: object.firstname,
-        last: object.lastname
-      }
+      if SolidusSupport.combined_first_and_last_name_in_address?
+        full_name = Spree::Address::Name.new(object.name)
+        {
+          first: full_name.first_name,
+          last: full_name.last_name
+        }
+      else
+        {
+          first: object.first_name,
+          last: object.last_name
+        }
+      end
     end
 
     def address
