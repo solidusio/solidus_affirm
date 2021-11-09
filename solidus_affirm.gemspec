@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency 'active_model_serializers', '~> 0.10'
-  s.add_dependency 'affirm-ruby', '1.1.0'
+  s.add_dependency 'affirm-ruby', '~> 1.1.0'
   s.add_dependency 'solidus_core', ['>= 2.0', '< 4']
   s.add_dependency "solidus_support", ['>= 0.8.1', '< 1']
 
