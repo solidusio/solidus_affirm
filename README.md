@@ -34,6 +34,9 @@ Spree::Core::Engine.routes.default_url_options = {
 
 You will need to get your public and private API keys from the Affirm Dashboard, see the [Affirm Documentation](https://docs.affirm.com/Integrate_Affirm/Direct_API).
 
+* Sandbox = https://sandbox.affirm.com/dashboard
+* Live = https://affirm.com/dashboard
+
 When you configure the payment gateway you need to provide those keys to
 the payment gateway and also the link to the Affirm JS Runtime script.
 
