@@ -26,7 +26,7 @@ module SolidusAffirm
       app.config.spree.payment_methods << 'SolidusAffirm::Gateway'
     end
 
-    initializer 'spree.solidus_affirm.action_controller' do |_app|
+    config.to_prepare do
       ActiveSupport.on_load :action_controller do |klass|
         next if klass.name == "ActionController::API"
 
