@@ -23,7 +23,7 @@ module SolidusAffirm
     end
 
     initializer "register_solidus_affirm_gateway", after: "spree.register.payment_methods" do |app|
-      app.config.spree.payment_methods << SolidusAffirm::Gateway
+      app.config.spree.payment_methods << 'SolidusAffirm::Gateway'
     end
 
     initializer 'spree.solidus_affirm.action_controller' do |_app|
