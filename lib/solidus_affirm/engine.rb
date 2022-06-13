@@ -22,15 +22,11 @@ module SolidusAffirm
       end
     end
 
-    initializer "spree.solidus_affirm.environment", before: :load_config_initializers do |_app|
-      SolidusAffirm::Config = SolidusAffirm::Configuration.new
-    end
-
     initializer "register_solidus_affirm_gateway", after: "spree.register.payment_methods" do |app|
-      app.config.spree.payment_methods << SolidusAffirm::Gateway
+      app.config.spree.payment_methods << 'SolidusAffirm::Gateway'
     end
 
-    initializer 'spree.solidus_affirm.action_controller' do |_app|
+    config.to_prepare do
       ActiveSupport.on_load :action_controller do |klass|
         next if klass.name == "ActionController::API"
 
