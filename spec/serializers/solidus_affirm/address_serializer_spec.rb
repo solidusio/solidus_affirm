@@ -37,7 +37,7 @@ RSpec.describe SolidusAffirm::AddressSerializer do
   # This is a regression test that was added because previously the address
   # serializer would error when the state was nil.
   context "the country doesn't have states" do
-    let(:country) { create(:country, iso3: "VAT")}
+    let(:country) { create(:country, iso3: "VAT", states_required: false) }
     let(:address) { create(:address, country: country, state: nil, zipcode: 10001) }
 
     it "serializes the address" do
