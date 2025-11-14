@@ -1,5 +1,8 @@
 # SolidusAffirm
 
+> [!NOTE]
+> DEPRECATED: This extension is deprecated. There is a [new extension](https://github.com/solidusio-contrib/solidus_affirm_v2/) that should be used instead.
+
 [![CircleCI](https://circleci.com/gh/solidusio/solidus_affirm.svg?style=svg)](https://circleci.com/gh/solidusio/solidus_affirm)
 
 This extension provides the [Affirm](https://www.affirm.com/) payment option
