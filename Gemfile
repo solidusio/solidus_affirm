@@ -21,7 +21,7 @@ end
 gem "rails", ">0.a"
 
 # Provides basic authentication functionality for testing parts of your engine
-gem "solidus_auth_devise"
+gem "solidus_auth_devise", git: "git@github.com:solidusio/solidus_auth_devise.git"
 
 case ENV["DB"]
 when "mysql"
@@ -33,6 +33,7 @@ else
 end
 
 gem "rails-controller-testing", group: :test
+gem "affirm", git: "git@github.com:SuperGoodSoft/affirm-ruby.git", require: "affirm"
 
 gemspec
 
