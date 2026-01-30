@@ -18,7 +18,7 @@ module SolidusAffirm
     end
 
     def partial_name
-      'affirm'
+      "affirm"
     end
     alias_method :method_type, :partial_name
 

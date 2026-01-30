@@ -1,11 +1,11 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.describe SolidusAffirm::LineItemSerializer do
-  let(:line_item) { create(:line_item, price: BigDecimal('14.99')) }
+  let(:line_item) { create(:line_item, price: BigDecimal("14.99")) }
   let(:serializer) { SolidusAffirm::LineItemSerializer.new(line_item, root: false) }
   subject { JSON.parse(serializer.to_json) }
 
-  describe 'display_name' do
+  describe "display_name" do
     it "return the line_item variant name" do
       expect(subject["display_name"]).to eql line_item.name
     end
@@ -27,7 +27,7 @@ RSpec.describe SolidusAffirm::LineItemSerializer do
     context "with variant specific image" do
       it "will return the variant image url" do
         expect(line_item.variant).to receive(:images).and_return([create(:image)]).twice
-        expect(subject['item_image_url']).to match /(blank|thinking-cat).jpg/
+        expect(subject["item_image_url"]).to match(/(blank|thinking-cat).jpg/)
       end
     end
 
@@ -36,7 +36,7 @@ RSpec.describe SolidusAffirm::LineItemSerializer do
 
       it "will return the master product image url" do
         expect(line_item.variant.product).to receive(:images).and_return([create(:image)]).twice
-        expect(subject['item_image_url']).to match /(blank|thinking-cat).jpg/
+        expect(subject["item_image_url"]).to match(/(blank|thinking-cat).jpg/)
       end
     end
   end
@@ -48,7 +48,7 @@ RSpec.describe SolidusAffirm::LineItemSerializer do
     end
 
     it "is the url from the line_item product" do
-      expect(subject['item_url']).to eql product_url
+      expect(subject["item_url"]).to eql product_url
     end
   end
 end

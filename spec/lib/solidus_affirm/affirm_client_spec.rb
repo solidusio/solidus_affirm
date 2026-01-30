@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.describe SolidusAffirm::AffirmClient do
   let(:gateway_options) do

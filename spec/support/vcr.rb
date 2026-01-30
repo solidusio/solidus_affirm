@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'webmock'
-require 'vcr'
+require "webmock"
+require "vcr"
 
 VCR.configure do |config|
   config.ignore_localhost = true

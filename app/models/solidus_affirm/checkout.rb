@@ -7,7 +7,7 @@ module SolidusAffirm
     end
 
     def actions
-      %w(capture void credit)
+      %w[capture void credit]
     end
 
     def can_capture?(payment)

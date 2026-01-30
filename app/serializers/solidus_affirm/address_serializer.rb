@@ -1,4 +1,4 @@
-require 'active_model_serializers'
+require "active_model_serializers"
 
 module SolidusAffirm
   class AddressSerializer < ActiveModel::Serializer

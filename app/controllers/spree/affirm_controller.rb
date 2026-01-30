@@ -18,7 +18,7 @@ module Spree
 
       affirm_checkout.transaction do
         if affirm_checkout.save!
-          payment = order.payments.create!({
+          order.payments.create!({
             payment_method_id: affirm_params[:payment_method_id],
             source: affirm_checkout,
             amount: order.total

@@ -1,4 +1,4 @@
-require 'affirm'
+require "affirm"
 
 module SolidusAffirm
   # Wrapper around using the Affirm API client for the Affirm Gateway.
@@ -8,9 +8,9 @@ module SolidusAffirm
   class AffirmClient
     def initialize(options)
       ::Affirm.configure do |config|
-        config.public_api_key  = options[:public_api_key]
+        config.public_api_key = options[:public_api_key]
         config.private_api_key = options[:private_api_key]
-        config.environment     = options[:test_mode] ? :sandbox : :production
+        config.environment = options[:test_mode] ? :sandbox : :production
       end
     end
 
@@ -35,18 +35,18 @@ module SolidusAffirm
     def void(charge_id, _money, _options = {})
       response = ::Affirm::Charge.void(charge_id)
       if response.success?
-        return ActiveMerchant::Billing::Response.new(true, "Transaction Voided")
+        ActiveMerchant::Billing::Response.new(true, "Transaction Voided")
       else
-        return ActiveMerchant::Billing::Response.new(false, response.error.message)
+        ActiveMerchant::Billing::Response.new(false, response.error.message)
       end
     end
 
     def credit(money, charge_id, _options = {})
       response = ::Affirm::Charge.refund(charge_id, amount: money)
       if response.success?
-        return ActiveMerchant::Billing::Response.new(true, "Transaction Credited with #{money}")
+        ActiveMerchant::Billing::Response.new(true, "Transaction Credited with #{money}")
       else
-        return ActiveMerchant::Billing::Response.new(false, response.error.message)
+        ActiveMerchant::Billing::Response.new(false, response.error.message)
       end
     end
 
