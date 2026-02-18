@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.describe AffirmHelper do
   describe "#affirm_payload_json" do

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spree/core'
+require "spree/core"
 
 module SolidusAffirm
   class Engine < Rails::Engine
@@ -8,7 +8,7 @@ module SolidusAffirm
 
     isolate_namespace ::Spree
 
-    engine_name 'solidus_affirm'
+    engine_name "solidus_affirm"
 
     # use rspec for tests
     config.generators do |g|
@@ -16,14 +16,14 @@ module SolidusAffirm
     end
 
     config.after_initialize do
-      versions_without_api_custom_source_templates = Gem::Requirement.new('< 2.6')
+      versions_without_api_custom_source_templates = Gem::Requirement.new("< 2.6")
       if versions_without_api_custom_source_templates.satisfied_by?(Spree.solidus_gem_version)
-        require_dependency 'solidus_affirm/backward_compatibility_hacks/api_template'
+        require_dependency "solidus_affirm/backward_compatibility_hacks/api_template"
       end
     end
 
     initializer "register_solidus_affirm_gateway", after: "spree.register.payment_methods" do |app|
-      app.config.spree.payment_methods << 'SolidusAffirm::Gateway'
+      app.config.spree.payment_methods << "SolidusAffirm::Gateway"
     end
 
     config.to_prepare do

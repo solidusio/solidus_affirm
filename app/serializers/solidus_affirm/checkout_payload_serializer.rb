@@ -1,9 +1,9 @@
-require 'active_model_serializers'
+require "active_model_serializers"
 
 module SolidusAffirm
   class CheckoutPayloadSerializer < ActiveModel::Serializer
     attributes :merchant, :shipping, :billing, :items, :discounts, :metadata,
-    :order_id, :shipping_amount, :tax_amount, :total
+      :order_id, :shipping_amount, :tax_amount, :total
 
     def merchant
       hsh = {
